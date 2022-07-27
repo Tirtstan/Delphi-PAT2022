@@ -617,6 +617,11 @@ begin
   begin
     btnMoreInfo.Enabled := true;
   end;
+
+  if NOT(lstUniCourses.ItemIndex = -1) then
+  begin
+    lstUniCourses.Hint := lstUniCourses.Items[lstUniCourses.ItemIndex];
+  end;
 end;
 
 procedure TfrmUniversityInfo.redReviewChange(Sender: TObject);

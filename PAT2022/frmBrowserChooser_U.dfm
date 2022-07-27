@@ -43,6 +43,15 @@ object frmBrowserChooser: TfrmBrowserChooser
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object lblUser: TLabel
+      Left = 119
+      Top = 14
+      Width = 874
+      Height = 30
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Currently Logged In As'
+    end
     object pnlUniversities: TPanel
       Left = 136
       Top = 162
