@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, JPEG,
-  clsFormatCalculations;
+  clsFormatCalculations, dbPAT2022;
 
 type
   TfrmBrowserChooser = class(TForm)
@@ -28,6 +28,7 @@ type
     btnBack: TButton;
     btnProfile: TButton;
     btnAdmin: TButton;
+    lblUser: TLabel;
     procedure btnUniClick(Sender: TObject);
     procedure btnCoursesClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -104,6 +105,21 @@ begin
   // Other
 
   btnAdmin.Visible := false;
+  with dbmPAT2022 do
+  begin
+    tblStudents.first;
+    while NOT(tblStudents.Eof) do
+    begin
+      if iStudentID = tblStudents['StudentID'] then
+      begin
+        lblUser.Caption := 'Currently Logged In As ' + tblStudents
+          ['StudentName'];
+        break;
+      end;
+      tblStudents.Next;
+    end;
+  end;
+
 
   // Colour Scheme
 
@@ -122,6 +138,7 @@ begin
   Label1.Font.Color := Secondary;
   Label2.Font.Color := Secondary;
   Label3.Font.Color := Secondary;
+  lblUser.Font.Color := Secondary;
 
   // Admin Button
 

@@ -429,6 +429,8 @@ object frmUniversityInfo: TfrmUniversityInfo
             'Course 2'
             'Course 3')
           ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
           OnClick = lstUniCoursesClick
         end
