@@ -20,7 +20,6 @@ type
     btnHelp: TButton;
     Panel1: TPanel;
     redHelp: TRichEdit;
-    btnClose: TButton;
     Panel2: TPanel;
     Panel3: TPanel;
     Button1: TButton;
@@ -33,6 +32,7 @@ type
     procedure btnLogin1Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     bOnOff: boolean;
@@ -100,6 +100,11 @@ procedure TfrmWelcome.Button1Click(Sender: TObject);
 begin
   frmWelcome.Hide;
   frmCustomise.show;
+end;
+
+procedure TfrmWelcome.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmWelcome.FormCreate(Sender: TObject);

@@ -15,7 +15,6 @@ type
     Panel3: TPanel;
     btnPrimaryColour: TButtonColor;
     btnBack: TButton;
-    btnClose: TButton;
     Panel4: TPanel;
     btnSecondaryColour: TButtonColor;
     Panel5: TPanel;
@@ -73,6 +72,7 @@ type
     procedure bitResetMouseMove(Sender: TObject; Shift: TShiftState;
       X, Y: Integer);
     procedure tmrTooltipTimer(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     tColour, tPreset1, tPreset2, tPreset3, tPreset4: TextFile;
@@ -232,7 +232,7 @@ end;
 
 procedure TfrmCustomise.btnBackClick(Sender: TObject);
 begin
-  frmCustomise.Close;
+  frmCustomise.Hide;
   frmWelcome.Show;
 end;
 
@@ -391,6 +391,11 @@ begin
   redExample.Font.color := btnSecondaryColour.SymbolColor;
   Panel9.Font.color := btnSecondaryColour.SymbolColor;
   Panel7.color := btnSecondaryColour.SymbolColor;
+end;
+
+procedure TfrmCustomise.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmCustomise.FormCreate(Sender: TObject);

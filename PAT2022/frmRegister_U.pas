@@ -16,7 +16,6 @@ type
     Panel2: TPanel;
     Label1: TLabel;
     edtNameR: TEdit;
-    Button1: TButton;
     Button2: TButton;
     edtSurnameR: TEdit;
     edtEmailR: TEdit;
@@ -60,6 +59,7 @@ type
     procedure pfp5Click(Sender: TObject);
     procedure btnRegisterRClick(Sender: TObject);
     procedure chkShowPasswordClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objValidation: TValidation;
@@ -288,7 +288,7 @@ begin
     end;
 
     ShowMessage('Successfully Registered!');
-    frmRegister.Close;
+    frmRegister.Hide;
     frmLogin.Show;
 
   end
@@ -306,7 +306,7 @@ end;
 
 procedure TfrmRegister.Button2Click(Sender: TObject);
 begin
-  frmRegister.Close;
+  frmRegister.Hide;
   frmWelcome.Show;
 end;
 
@@ -320,6 +320,11 @@ begin
   begin
     edtPasswordR.PasswordChar := #0;
   end;
+end;
+
+procedure TfrmRegister.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmRegister.FormCreate(Sender: TObject);

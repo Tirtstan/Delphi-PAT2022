@@ -10,6 +10,7 @@ object frmWelcome: TfrmWelcome
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -139,21 +140,6 @@ object frmWelcome: TfrmWelcome
         end
       end
     end
-    object btnClose: TButton
-      Left = 994
-      Top = 14
-      Width = 105
-      Height = 49
-      Caption = 'Close'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clMoneyGreen
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-      OnClick = btnCloseClick
-    end
     object Panel2: TPanel
       Left = 17
       Top = 62
@@ -162,7 +148,7 @@ object frmWelcome: TfrmWelcome
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 2
       object Panel4: TPanel
         Left = 8
         Top = 7
@@ -211,7 +197,7 @@ object frmWelcome: TfrmWelcome
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
       OnClick = Button1Click
     end
   end

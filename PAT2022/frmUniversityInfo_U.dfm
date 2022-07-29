@@ -11,6 +11,7 @@ object frmUniversityInfo: TfrmUniversityInfo
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -25,8 +26,8 @@ object frmUniversityInfo: TfrmUniversityInfo
     ParentBackground = False
     TabOrder = 0
     object Panel2: TPanel
-      Left = 24
-      Top = 64
+      Left = 43
+      Top = 68
       Width = 361
       Height = 585
       BevelOuter = bvNone
@@ -43,7 +44,7 @@ object frmUniversityInfo: TfrmUniversityInfo
       end
       object Panel3: TPanel
         Left = 8
-        Top = 8
+        Top = 10
         Width = 345
         Height = 57
         BevelOuter = bvNone
@@ -184,8 +185,8 @@ object frmUniversityInfo: TfrmUniversityInfo
       OnClick = btnBackClick
     end
     object Panel5: TPanel
-      Left = 424
-      Top = 64
+      Left = 448
+      Top = 68
       Width = 625
       Height = 585
       BevelOuter = bvNone
@@ -497,21 +498,6 @@ object frmUniversityInfo: TfrmUniversityInfo
           end
         end
       end
-    end
-    object btnClose: TButton
-      Left = 992
-      Top = 9
-      Width = 105
-      Height = 49
-      Caption = 'Close'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-      OnClick = btnCloseClick
     end
   end
 end

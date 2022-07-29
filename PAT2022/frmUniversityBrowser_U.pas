@@ -13,7 +13,6 @@ type
   TfrmUniversityBrowser = class(TForm)
     Panel1: TPanel;
     btnBack: TButton;
-    btnClose: TButton;
     Panel2: TPanel;
     Label1: TLabel;
     Panel4: TPanel;
@@ -25,6 +24,7 @@ type
     procedure lblUniClick(Sender: TObject);
     procedure lblUniMouseEnter(Sender: TObject);
     procedure lblUniMouseLeave(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -51,7 +51,7 @@ uses frmLogin_U, frmCourseBrowser_U, frmBrowserChooser_U, frmUniversityInfo_U,
 
 procedure TfrmUniversityBrowser.btnBackClick(Sender: TObject);
 begin
-  frmUniversityBrowser.Close;
+  frmUniversityBrowser.Hide;
   frmBrowserChooser.Show;
 end;
 
@@ -62,8 +62,14 @@ end;
 
 procedure TfrmUniversityBrowser.btnCoursesClick(Sender: TObject);
 begin
-  frmUniversityBrowser.Close;
+  frmUniversityBrowser.Hide;
   frmCourseBrowser.Show;
+end;
+
+procedure TfrmUniversityBrowser.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmUniversityBrowser.FormCreate(Sender: TObject);
@@ -327,7 +333,7 @@ begin
 
   iUniversityID := (Sender AS TLabel).Tag;
   sUniversityName := (Sender AS TLabel).Caption;
-  frmUniversityBrowser.Close;
+  frmUniversityBrowser.Hide;
   frmUniversityInfo.Show;
 
 end;

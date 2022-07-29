@@ -10,6 +10,7 @@ object frmRegister: TfrmRegister
   Font.Height = -19
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -22,7 +23,7 @@ object frmRegister: TfrmRegister
     BevelOuter = bvNone
     Color = 9128543
     ParentBackground = False
-    TabOrder = 2
+    TabOrder = 1
     object Label1: TLabel
       Left = 464
       Top = 48
@@ -73,7 +74,7 @@ object frmRegister: TfrmRegister
     BevelOuter = bvNone
     Color = 4822522
     ParentBackground = False
-    TabOrder = 3
+    TabOrder = 2
     object Panel7: TPanel
       Left = 8
       Top = 8
@@ -285,7 +286,7 @@ object frmRegister: TfrmRegister
     BevelOuter = bvNone
     Color = 4822522
     ParentBackground = False
-    TabOrder = 4
+    TabOrder = 3
     object lblPfpError: TLabel
       Left = 8
       Top = 295
@@ -336,6 +337,28 @@ object frmRegister: TfrmRegister
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold, fsUnderline]
         ParentFont = False
+      end
+      object redBioR: TRichEdit
+        Left = 8
+        Top = 29
+        Width = 353
+        Height = 141
+        Hint = 'Enter a bio... (255 Max Characters)'
+        BorderStyle = bsNone
+        Color = 11759493
+        EditMargins.Left = 3
+        EditMargins.Right = 3
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 4822522
+        Font.Height = -15
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        MaxLength = 255
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnChange = redBioRChange
       end
     end
     object Panel5: TPanel
@@ -457,21 +480,6 @@ object frmRegister: TfrmRegister
       end
     end
   end
-  object Button1: TButton
-    Left = 1016
-    Top = 8
-    Width = 99
-    Height = 49
-    Caption = 'Close'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 5
-    OnClick = Button1Click
-  end
   object Button2: TButton
     Left = 8
     Top = 8
@@ -486,27 +494,5 @@ object frmRegister: TfrmRegister
     ParentFont = False
     TabOrder = 0
     OnClick = Button2Click
-  end
-  object redBioR: TRichEdit
-    Left = 624
-    Top = 256
-    Width = 353
-    Height = 141
-    Hint = 'Enter a bio... (255 Max Characters)'
-    BorderStyle = bsNone
-    Color = 11759493
-    EditMargins.Left = 3
-    EditMargins.Right = 3
-    Font.Charset = ANSI_CHARSET
-    Font.Color = 4822522
-    Font.Height = -15
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    MaxLength = 255
-    ParentFont = False
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
-    OnChange = redBioRChange
   end
 end

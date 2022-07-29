@@ -10,6 +10,7 @@ object frmUniversityBrowser: TfrmUniversityBrowser
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -29,24 +30,15 @@ object frmUniversityBrowser: TfrmUniversityBrowser
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    object btnClose: TButton
-      Left = 1016
-      Top = 8
-      Width = 97
-      Height = 49
-      Caption = 'Close'
-      TabOrder = 0
-      OnClick = btnCloseClick
-    end
     object Panel4: TPanel
       Left = 117
       Top = 8
-      Width = 893
+      Width = 894
       Height = 90
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 1
     end
     object Panel2: TPanel
       Left = 131
@@ -56,7 +48,7 @@ object frmUniversityBrowser: TfrmUniversityBrowser
       BevelOuter = bvNone
       Color = 9128543
       ParentBackground = False
-      TabOrder = 1
+      TabOrder = 0
       object Label1: TLabel
         Left = 16
         Top = 12
@@ -85,7 +77,7 @@ object frmUniversityBrowser: TfrmUniversityBrowser
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnBackClick
     end
   end

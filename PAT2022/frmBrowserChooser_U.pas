@@ -24,19 +24,18 @@ type
     btnCourses: TButton;
     imgUni: TImage;
     imgCourse: TImage;
-    btnClose: TButton;
     btnBack: TButton;
     btnProfile: TButton;
     btnAdmin: TButton;
     lblUser: TLabel;
     procedure btnUniClick(Sender: TObject);
     procedure btnCoursesClick(Sender: TObject);
-    procedure btnCloseClick(Sender: TObject);
     procedure btnBackClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnProfileClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAdminClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -57,7 +56,7 @@ uses
 
 procedure TfrmBrowserChooser.btnAdminClick(Sender: TObject);
 begin
-  frmBrowserChooser.Close;
+  frmBrowserChooser.Hide;
   frmAdminPage.Show;
 end;
 
@@ -67,14 +66,9 @@ begin
   frmLogin.Show;
 end;
 
-procedure TfrmBrowserChooser.btnCloseClick(Sender: TObject);
-begin
-  Application.Terminate;
-end;
-
 procedure TfrmBrowserChooser.btnCoursesClick(Sender: TObject);
 begin
-  frmBrowserChooser.Close;
+  frmBrowserChooser.Hide;
   frmCourseBrowser.Show;
 end;
 
@@ -86,8 +80,14 @@ end;
 
 procedure TfrmBrowserChooser.btnUniClick(Sender: TObject);
 begin
-  frmBrowserChooser.Close;
+  frmBrowserChooser.Hide;
   frmUniversityBrowser.Show;
+end;
+
+procedure TfrmBrowserChooser.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmBrowserChooser.FormCreate(Sender: TObject);

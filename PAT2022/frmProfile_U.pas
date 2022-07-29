@@ -11,7 +11,6 @@ uses
 type
   TfrmProfile = class(TForm)
     Panel1: TPanel;
-    btnClose: TButton;
     Panel2: TPanel;
     Panel3: TPanel;
     imgPfp: TImage;
@@ -329,7 +328,7 @@ end;
 
 procedure TfrmProfile.btnCloseClick(Sender: TObject);
 begin
-  frmProfile.Close;
+  frmProfile.Hide;
 end;
 
 procedure TfrmProfile.chkIDClick(Sender: TObject);
@@ -356,7 +355,8 @@ begin
   end;
 end;
 
-procedure TfrmProfile.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmProfile.FormClose
+(Sender: TObject; var Action: TCloseAction);
 begin
   iStudentProfileID := 0;
 end;
