@@ -16,7 +16,6 @@ type
     edtEmailL: TEdit;
     edtPasswordL: TEdit;
     chkShowPassword: TCheckBox;
-    btnClose: TButton;
     btnBack: TButton;
     Panel3: TPanel;
     btnLogin: TButton;
@@ -36,6 +35,7 @@ type
     procedure lblForgotPasswordClick(Sender: TObject);
     procedure btnRegisterClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -58,7 +58,7 @@ uses
 
 procedure TfrmLogin.btnBackClick(Sender: TObject);
 begin
-  frmLogin.Close;
+  frmLogin.Hide;
   frmWelcome.Show;
 end;
 
@@ -97,7 +97,7 @@ begin
   if (bEmail = True) AND (bPassword = True) then
   begin
     ShowMessage('Successfully logged in!');
-    frmLogin.Close;
+    frmLogin.Hide;
     frmBrowserChooser.Show;
   end
   else
@@ -108,7 +108,7 @@ end;
 
 procedure TfrmLogin.btnRegisterClick(Sender: TObject);
 begin
-  frmLogin.Close;
+  frmLogin.Hide;
   frmRegister.Show;
 end;
 
@@ -122,6 +122,11 @@ begin
   begin
     edtPasswordL.PasswordChar := #0;
   end;
+end;
+
+procedure TfrmLogin.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmLogin.FormCreate(Sender: TObject);

@@ -10,6 +10,7 @@ object frmCourseInfo: TfrmCourseInfo
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -637,21 +638,6 @@ object frmCourseInfo: TfrmCourseInfo
           end
         end
       end
-    end
-    object btnClose: TButton
-      Left = 992
-      Top = 9
-      Width = 105
-      Height = 49
-      Caption = 'Close'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-      OnClick = btnCloseClick
     end
   end
 end

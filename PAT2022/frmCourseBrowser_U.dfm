@@ -10,6 +10,7 @@ object frmCourseBrowser: TfrmCourseBrowser
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -57,15 +58,6 @@ object frmCourseBrowser: TfrmCourseBrowser
       TabOrder = 1
       OnClick = btnBackClick
     end
-    object btnClose: TButton
-      Left = 1016
-      Top = 8
-      Width = 91
-      Height = 49
-      Caption = 'Close'
-      TabOrder = 2
-      OnClick = btnCloseClick
-    end
     object pnlCourseInfo: TPanel
       Left = 864
       Top = 92
@@ -74,7 +66,7 @@ object frmCourseBrowser: TfrmCourseBrowser
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 2
       object Panel2: TPanel
         Left = 8
         Top = 14
@@ -254,7 +246,7 @@ object frmCourseBrowser: TfrmCourseBrowser
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       object pnlTitle: TPanel
         Left = 11
         Top = 9

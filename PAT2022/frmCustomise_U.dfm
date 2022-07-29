@@ -10,6 +10,7 @@ object frmCustomise: TfrmCustomise
   Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -180,15 +181,6 @@ object frmCustomise: TfrmCustomise
       TabOrder = 1
       OnClick = btnBackClick
     end
-    object btnClose: TButton
-      Left = 848
-      Top = 8
-      Width = 105
-      Height = 50
-      Caption = 'Close'
-      TabOrder = 2
-      OnClick = btnCloseClick
-    end
     object Panel5: TPanel
       Left = 320
       Top = 484
@@ -197,7 +189,7 @@ object frmCustomise: TfrmCustomise
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 2
       object bitConfirm: TBitBtn
         Left = 8
         Top = 8
@@ -249,7 +241,7 @@ object frmCustomise: TfrmCustomise
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       object Panel9: TPanel
         Left = 8
         Top = 231
@@ -337,7 +329,7 @@ object frmCustomise: TfrmCustomise
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 5
+      TabOrder = 4
       object Panel8: TPanel
         Left = 9
         Top = 8
@@ -364,7 +356,7 @@ object frmCustomise: TfrmCustomise
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 6
+      TabOrder = 5
       object Panel18: TPanel
         Left = 8
         Top = 8

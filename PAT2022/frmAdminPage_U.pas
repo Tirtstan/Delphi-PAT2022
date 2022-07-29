@@ -13,7 +13,6 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     btnBack: TButton;
-    Button1: TButton;
     btnStudents: TButton;
     btnUniversities: TButton;
     btnUniversityReviews: TButton;
@@ -34,11 +33,17 @@ type
     Panel7: TPanel;
     DBNavigator1: TDBNavigator;
     DBNavigator2: TDBNavigator;
-    Panel8: TPanel;
     redSQL: TRichEdit;
     Label1: TLabel;
     Panel9: TPanel;
-    btnExecute: TButton;
+    btnSQLCustom: TButton;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    Panel12: TPanel;
+    Panel13: TPanel;
+    btnSQLPreset: TButton;
+    lstSQL: TListBox;
+    Panel8: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnStudentsClick(Sender: TObject);
@@ -55,10 +60,12 @@ type
     procedure btnLastClick(Sender: TObject);
     procedure btnPriorClick(Sender: TObject);
     procedure btnNextClick(Sender: TObject);
-    procedure redSQLChange(Sender: TObject);
-    procedure redSQLKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
-    procedure btnExecuteClick(Sender: TObject);
+    procedure btnSQLCustomClick(Sender: TObject);
+    procedure redSQLChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure lstSQLClick(Sender: TObject);
+    procedure btnSQLPresetClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -71,10 +78,11 @@ type
 
 var
   frmAdminPage: TfrmAdminPage;
+  sSQLPreset: string;
 
 implementation
 
-uses frmWelcome_U, frmCustomise_U;
+uses frmBrowserChooser_U, frmCustomise_U;
 
 {$R *.dfm}
 
@@ -121,20 +129,43 @@ begin
 
 end;
 
-procedure TfrmAdminPage.btnExecuteClick(Sender: TObject);
-var
-  sSQL: string;
+procedure TfrmAdminPage.btnSQLCustomClick(Sender: TObject);
 begin
   dbgDatabase.DataSource := dbmPAT2022.dsSQL;
-  sSQL := redSQL.Text;
 
   with dbmPAT2022 do
   begin
     qrySQL.Close;
     qrySQL.SQL.Clear;
-    qrySQL.SQL.Add(sSQL);
+    qrySQL.SQL.Add(redSQL.Text);
     qrySQL.Open;
   end;
+end;
+
+procedure TfrmAdminPage.btnSQLPresetClick(Sender: TObject);
+begin
+  if NOT(sSQLPreset = '') then
+  begin
+    dbgDatabase.DataSource := dbmPAT2022.dsSQL;
+
+    with dbmPAT2022 do
+    begin
+      qrySQL.Close;
+      qrySQL.SQL.Clear;
+      qrySQL.SQL.Add(sSQLPreset);
+      qrySQL.Open;
+    end;
+
+    if lstSQL.ItemIndex = 3 then
+    begin
+      with dbgDatabase do
+      begin
+        Columns[0].Width := 250;
+        Columns[1].Width := 100;
+      end;
+    end;
+  end;
+
 end;
 
 procedure TfrmAdminPage.btnStudentsClick(Sender: TObject);
@@ -428,8 +459,8 @@ end;
 
 procedure TfrmAdminPage.btnBackClick(Sender: TObject);
 begin
-  frmAdminPage.Close;
-  frmWelcome.Show;
+  frmAdminPage.Hide;
+  frmBrowserChooser.Show;
 end;
 
 procedure TfrmAdminPage.btnCourseReviewsClick(Sender: TObject);
@@ -477,6 +508,11 @@ begin
 
 end;
 
+procedure TfrmAdminPage.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
+end;
+
 procedure TfrmAdminPage.FormCreate(Sender: TObject);
 begin
   frmAdminPage.Position := poScreenCenter;
@@ -497,6 +533,8 @@ end;
 
 procedure TfrmAdminPage.FormShow(Sender: TObject);
 begin
+
+  // Colour Scheme
   Panel1.Color := Primary;
   Panel2.Color := Secondary;
   Panel3.Color := Secondary;
@@ -504,51 +542,110 @@ begin
   Panel5.Color := Primary;
   Panel6.Color := Primary;
   Panel7.Color := Primary;
-  Panel8.Color := Primary;
+  Panel8.Color := Secondary;
   Panel9.Color := Primary;
+  Panel10.Color := Secondary;
+  Panel11.Color := Primary;
+  Panel11.Font.Color := Secondary;
+  Panel12.Color := Primary;
+  Panel13.Color := Secondary;
 
   redSQL.Color := PrimaryBrighter;
   redSQL.Font.Color := Secondary;
 
   lblTitle.Font.Color := Secondary;
   Label1.Font.Color := Secondary;
+
+  lstSQL.Color := PrimaryBrighter;
+  lstSQL.Font.Color := Secondary;
+
+  // Other
+
+  if redSQL.Text = '' then
+  begin
+    btnSQLCustom.Enabled := false;
+  end
+  else
+  begin
+    btnSQLCustom.Enabled := true;
+  end;
+
+  if lstSQL.ItemIndex = -1 then
+  begin
+    btnSQLPreset.Enabled := false;
+  end
+  else
+  begin
+    btnSQLPreset.Enabled := true;
+  end;
+
+  dbmPAT2022.tblCourses.Open;
+  dbgDatabase.DataSource := dbmPAT2022.dsrCourses;
+  DBNavigator1.DataSource := dbmPAT2022.dsrCourses;
+  DBNavigator2.DataSource := dbmPAT2022.dsrCourses;
+  sTable := 'tblCourses';
+
+  with dbgDatabase do
+  begin
+    Columns[0].Width := 50;
+    Columns[1].Width := 200;
+    Columns[2].Width := 150;
+    Columns[3].Width := 50;
+    Columns[4].Width := 100;
+  end;
+end;
+
+procedure TfrmAdminPage.lstSQLClick(Sender: TObject);
+begin
+
+  if lstSQL.ItemIndex = -1 then
+  begin
+    btnSQLPreset.Enabled := false;
+  end
+  else
+  begin
+    btnSQLPreset.Enabled := true;
+  end;
+
+  case lstSQL.ItemIndex of
+    0:
+      begin
+        sSQLPreset :=
+          'SELECT AVG(Rating) AS [Average Rating For tblUniversityReviews] FROM tblUniversityReviews';
+      end;
+    1:
+      begin
+        sSQLPreset :=
+          'SELECT MIN(Rating) AS [Lowest Rating For tblCourseReviews] FROM tblCourseReviews';
+      end;
+    2:
+      begin
+        sSQLPreset :=
+          'SELECT COUNT(UniversityID) AS [No Of Universities], Province  ' +
+          'FROM tblUniversities ' + 'GROUP BY Province ' +
+          'HAVING COUNT(UniversityID) >= 2';
+      end;
+    3:
+      begin
+        sSQLPreset := 'SELECT Course, ROUND(AVG(Rating), 2) AS [Average Rating]'
+          + 'FROM tblCourses, tblCourseReviews ' +
+          'WHERE tblCourses.CourseID = tblCourseReviews.CourseID ' +
+          'GROUP BY tblCourses.Course';
+
+      end;
+  end;
 end;
 
 procedure TfrmAdminPage.redSQLChange(Sender: TObject);
-var
-  sSQL: string;
 begin
-  { dbgDatabase.DataSource := dbmPAT2022.dsSQL;
-    sSQL := redSQL.Text;
-
-    with dbmPAT2022 do
-    begin
-    qrySQL.Close;
-    qrySQL.SQL.Clear;
-    qrySQL.SQL.Add(sSQL);
-    qrySQL.Open;
-    end; }
-
-end;
-
-procedure TfrmAdminPage.redSQLKeyPress(Sender: TObject; var Key: Char);
-var
-  sSQL: string;
-begin
-  { if Key = #13 then
-    begin
-    dbgDatabase.DataSource := dbmPAT2022.dsSQL;
-    sSQL := redSQL.Text;
-
-    with dbmPAT2022 do
-    begin
-    qrySQL.Close;
-    qrySQL.SQL.Clear;
-    qrySQL.SQL.Add(sSQL);
-    qrySQL.Open;
-    end;
-    end; }
-
+  if NOT(redSQL.Text = '') then
+  begin
+    btnSQLCustom.Enabled := true;
+  end
+  else
+  begin
+    btnSQLCustom.Enabled := false;
+  end;
 end;
 
 procedure TfrmAdminPage.srchDatabaseChange(Sender: TObject);

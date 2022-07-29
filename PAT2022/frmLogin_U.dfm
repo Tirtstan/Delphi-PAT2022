@@ -10,6 +10,7 @@ object frmLogin: TfrmLogin
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -174,22 +175,13 @@ object frmLogin: TfrmLogin
         end
       end
     end
-    object btnClose: TButton
-      Left = 1016
-      Top = 8
-      Width = 97
-      Height = 49
-      Caption = 'Close'
-      TabOrder = 3
-      OnClick = btnCloseClick
-    end
     object btnBack: TButton
       Left = 8
       Top = 8
       Width = 105
       Height = 49
       Caption = 'Back'
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnBackClick
     end
     object Panel3: TPanel
@@ -223,7 +215,7 @@ object frmLogin: TfrmLogin
       Width = 107
       Height = 51
       Caption = 'Register'
-      TabOrder = 5
+      TabOrder = 4
       OnClick = btnRegisterClick
     end
   end

@@ -2,7 +2,7 @@ object frmProfile: TfrmProfile
   Left = 0
   Top = 0
   Caption = 'Profile'
-  ClientHeight = 711
+  ClientHeight = 664
   ClientWidth = 518
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,30 +24,15 @@ object frmProfile: TfrmProfile
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
-    object btnClose: TButton
-      Left = 400
-      Top = 8
-      Width = 105
-      Height = 49
-      Caption = 'Close'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      OnClick = btnCloseClick
-    end
     object Panel2: TPanel
       Left = 288
-      Top = 63
+      Top = 20
       Width = 217
       Height = 265
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 1
+      TabOrder = 0
       object Panel4: TPanel
         Left = 8
         Top = 9
@@ -97,13 +82,13 @@ object frmProfile: TfrmProfile
     end
     object Panel3: TPanel
       Left = 16
-      Top = 63
+      Top = 20
       Width = 249
       Height = 560
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 1
       object Panel5: TPanel
         Left = 6
         Top = 12
@@ -404,13 +389,13 @@ object frmProfile: TfrmProfile
     end
     object Panel10: TPanel
       Left = 288
-      Top = 334
+      Top = 291
       Width = 217
       Height = 289
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 2
       object Panel9: TPanel
         Left = 8
         Top = 8
@@ -497,14 +482,14 @@ object frmProfile: TfrmProfile
       end
     end
     object Panel16: TPanel
-      Left = 168
-      Top = 639
+      Left = 173
+      Top = 594
       Width = 185
       Height = 58
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       object bitConfirmChanges: TBitBtn
         Left = 8
         Top = 8

@@ -58,9 +58,6 @@ Coordinates=10,280,62,58
 [Panel11]
 Coordinates=10,144,62,58
 
-[btnClose]
-Coordinates=265,10,65,58
-
 [Panel17]
 Coordinates=82,144,62,58
 
@@ -98,7 +95,7 @@ Coordinates=193,10,62,58
 Coordinates=10,212,98,58
 
 []
-Coordinates=60,269,91,36
+Coordinates=265,10,65,58
 
 [btnSaveToPreset]
 Coordinates=118,212,89,58

@@ -13,7 +13,6 @@ type
     Panel1: TPanel;
     ScrollBox1: TScrollBox;
     btnBack: TButton;
-    btnClose: TButton;
     lblTitle: TLabel;
     pnlTitle: TPanel;
     pnlCourseInfo: TPanel;
@@ -43,6 +42,7 @@ type
     procedure lblUniversityClick(Sender: TObject);
     procedure lblUniversityMouseEnter(Sender: TObject);
     procedure lblUniversityMouseLeave(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -87,7 +87,7 @@ uses
 
 procedure TfrmCourseBrowser.btnBackClick(Sender: TObject);
 begin
-  frmCourseBrowser.Close;
+  frmCourseBrowser.Hide;
   frmBrowserChooser.Show;
 end;
 
@@ -103,8 +103,14 @@ end;
 
 procedure TfrmCourseBrowser.btnMoreInfoClick(Sender: TObject);
 begin
-  frmCourseBrowser.Close;
+  frmCourseBrowser.Hide;
   frmCourseInfo.Show;
+end;
+
+procedure TfrmCourseBrowser.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmCourseBrowser.FormCreate(Sender: TObject);
@@ -292,7 +298,7 @@ begin
       begin
         sUniversityName := tblUniversities['University'];
 
-        frmCourseInfo.Close;
+        frmCourseInfo.Hide;
         frmUniversityInfo.Show;
 
         break;

@@ -10,6 +10,7 @@ object frmBrowserChooser: TfrmBrowserChooser
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
@@ -118,21 +119,6 @@ object frmBrowserChooser: TfrmBrowserChooser
         end
       end
     end
-    object btnClose: TButton
-      Left = 1008
-      Top = 8
-      Width = 99
-      Height = 49
-      Caption = 'Close'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 4822522
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 1
-      OnClick = btnCloseClick
-    end
     object btnBack: TButton
       Left = 8
       Top = 8
@@ -145,7 +131,7 @@ object frmBrowserChooser: TfrmBrowserChooser
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btnBackClick
     end
     object btnProfile: TButton
@@ -160,7 +146,7 @@ object frmBrowserChooser: TfrmBrowserChooser
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnProfileClick
     end
     object pnlCourses: TPanel
@@ -171,7 +157,7 @@ object frmBrowserChooser: TfrmBrowserChooser
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       object imgCourse: TImage
         Left = 16
         Top = 92
@@ -241,7 +227,7 @@ object frmBrowserChooser: TfrmBrowserChooser
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 5
+      TabOrder = 4
       OnClick = btnAdminClick
     end
   end

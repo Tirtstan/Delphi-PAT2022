@@ -21,7 +21,6 @@ type
     redDescription: TRichEdit;
     Label1: TLabel;
     Panel5: TPanel;
-    btnClose: TButton;
     Panel6: TPanel;
     Label2: TLabel;
     pnlButtons1: TPanel;
@@ -75,6 +74,7 @@ type
       X, Y: Integer);
     procedure tmrUniTooltipTimer(Sender: TObject);
     procedure cmbSortChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -346,7 +346,7 @@ end;
 
 procedure TfrmCourseInfo.btnBackClick(Sender: TObject);
 begin
-  frmCourseInfo.Close;
+  frmCourseInfo.Hide;
   frmCourseBrowser.Show;
 
 end;
@@ -360,6 +360,11 @@ procedure TfrmCourseInfo.cmbSortChange(Sender: TObject);
 begin
   lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
     frmCourseInfo, cmbSort);
+end;
+
+procedure TfrmCourseInfo.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmCourseInfo.FormCreate(Sender: TObject);

@@ -20,7 +20,6 @@ type
     redDescription: TRichEdit;
     Label1: TLabel;
     Panel5: TPanel;
-    btnClose: TButton;
     Panel6: TPanel;
     Label2: TLabel;
     pnlButtons1: TPanel;
@@ -63,6 +62,7 @@ type
     procedure lblUniTitleMouseEnter(Sender: TObject);
     procedure lblUniTitleMouseLeave(Sender: TObject);
     procedure cmbSortChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -374,12 +374,18 @@ end;
 
 procedure TfrmUniversityInfo.btnBackClick(Sender: TObject);
 begin
-  frmUniversityInfo.Close;
+  frmUniversityInfo.Hide;
   frmUniversityBrowser.Show;
 
 end;
 
 procedure TfrmUniversityInfo.btnCloseClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfrmUniversityInfo.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 begin
   Application.Terminate;
 end;

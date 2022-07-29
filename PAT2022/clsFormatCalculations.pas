@@ -897,7 +897,7 @@ end;
 
 procedure TFormatCalculation.FormHideShow(frmHide, frmShow: TForm);
 begin
-  frmHide.close;
+  frmHide.Hide;
   frmShow.Show;
 
   frmPreviousHide := frmHide;
