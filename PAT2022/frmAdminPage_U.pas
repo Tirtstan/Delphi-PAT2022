@@ -44,6 +44,7 @@ type
     btnSQLPreset: TButton;
     lstSQL: TListBox;
     Panel8: TPanel;
+    btnClearSQL: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnStudentsClick(Sender: TObject);
@@ -66,6 +67,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure lstSQLClick(Sender: TObject);
     procedure btnSQLPresetClick(Sender: TObject);
+    procedure btnClearSQLClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -461,6 +463,11 @@ procedure TfrmAdminPage.btnBackClick(Sender: TObject);
 begin
   frmAdminPage.Hide;
   frmBrowserChooser.Show;
+end;
+
+procedure TfrmAdminPage.btnClearSQLClick(Sender: TObject);
+begin
+  redSQL.Clear;
 end;
 
 procedure TfrmAdminPage.btnCourseReviewsClick(Sender: TObject);
