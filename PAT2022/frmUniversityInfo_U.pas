@@ -473,7 +473,7 @@ begin
 
   // Other stuff
 
-  redReview.MaxLength := 255;
+  redReview.MaxLength := 240;
   iUniversityID := 0;
   bitWriteReview.Enabled := true;
   bitDeleteReview.Enabled := false;
@@ -634,7 +634,7 @@ procedure TfrmUniversityInfo.redReviewChange(Sender: TObject);
 var
   iCharactersLeft: Integer;
 begin
-  iCharactersLeft := 255 - (length(redReview.Text));
+  iCharactersLeft := 240 - (length(redReview.Text));
   lblMaxCharacters.Caption := 'Characters Left: ' + IntToStr(iCharactersLeft);
 end;
 

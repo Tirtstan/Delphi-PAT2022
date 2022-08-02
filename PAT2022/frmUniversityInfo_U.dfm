@@ -360,7 +360,7 @@ object frmUniversityInfo: TfrmUniversityInfo
         end
         object cmbSort: TComboBox
           Left = 256
-          Top = 9
+          Top = 7
           Width = 162
           Height = 23
           AutoComplete = False

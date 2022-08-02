@@ -477,7 +477,7 @@ object frmCourseInfo: TfrmCourseInfo
         end
         object cmbSort: TComboBox
           Left = 256
-          Top = 10
+          Top = 7
           Width = 162
           Height = 23
           AutoComplete = False

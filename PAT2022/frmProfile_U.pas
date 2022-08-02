@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.ComCtrls, dbPAT2022, JPEG, db, Vcl.Buttons, clsValidation;
+  Vcl.ComCtrls, dbPAT2022, JPEG, db, Vcl.Buttons, clsValidation,
+  Vcl.WinXPickers;
 
 type
   TfrmProfile = class(TForm)
@@ -47,6 +48,8 @@ type
     Panel17: TPanel;
     edtID: TEdit;
     edtPassword: TEdit;
+    Panel18: TPanel;
+    dpkBirthday: TDatePicker;
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -305,7 +308,7 @@ begin
   else if iYesOrNo = mrYes then
   begin
     lblMaxCharacters.Visible := true;
-    redBio.Height := 177;
+    redBio.Height := 121;
     redBio.Text := 'Enter new bio here.';
     redBio.ReadOnly := false;
     bBioChanged := true;
@@ -355,8 +358,7 @@ begin
   end;
 end;
 
-procedure TfrmProfile.FormClose
-(Sender: TObject; var Action: TCloseAction);
+procedure TfrmProfile.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   iStudentProfileID := 0;
 end;
@@ -365,6 +367,7 @@ procedure TfrmProfile.FormCreate(Sender: TObject);
 begin
   frmProfile.Position := poScreenCenter;
   lblName.ShowHint := true;
+
 end;
 
 procedure TfrmProfile.FormShow(Sender: TObject);
@@ -393,6 +396,7 @@ begin
   Panel15.Color := Primary;
   Panel16.Color := Secondary;
   Panel17.Color := Primary;
+  Panel18.Color := Primary;
 
   // Labels
 
@@ -418,6 +422,13 @@ begin
   edtPassword.Color := PrimaryBrighter;
   edtPassword.Font.Color := Secondary;
 
+  dpkBirthday.Font.Color := Secondary;
+  dpkBirthday.Color := Primary;
+  dpkBirthday.HighlightColor := Primary;
+  dpkBirthday.PopupColor := PrimaryBrighter;
+  dpkBirthday.SelectionColor := Primary;
+  dpkBirthday.SelectionFontColor := Secondary;
+
   // Other failsafing
 
   bEmailChanged := false;
@@ -425,8 +436,8 @@ begin
   bPasswordChanged := false;
   bBioChanged := false;
 
-  redBio.MaxLength := 255;
-  redBio.Height := 201;
+  redBio.MaxLength := 240;
+  redBio.Height := 145;
   lblMaxCharacters.Visible := false;
 
   sNewEmail := '';
@@ -486,6 +497,7 @@ begin
           edtID.Text := tblStudents['ID'];
           redBio.Text := tblStudents['Bio'];
           imgPfp.Picture.LoadFromFile(tblStudents['ProfilePicture']);
+          dpkBirthday.Date := tblStudents['Birthday'];
 
           bitChangeEmail.Enabled := true;
           bitChangePhoneNumber.Enabled := true;
@@ -506,6 +518,7 @@ begin
           chkID.Checked := true;
           redBio.Text := tblStudents['Bio'];
           imgPfp.Picture.LoadFromFile(tblStudents['ProfilePicture']);
+          dpkBirthday.Date := tblStudents['Birthday'];
 
           bitChangeEmail.Enabled := false;
           bitChangePhoneNumber.Enabled := false;
@@ -529,7 +542,7 @@ var
   iCharactersLeft: integer;
 begin
   lblMaxCharacters.Caption := 'Max Characters: 255';
-  iCharactersLeft := 255 - (length(redBio.Text));
+  iCharactersLeft := 240 - (length(redBio.Text));
   lblMaxCharacters.Caption := 'Characters Left: ' + IntToStr(iCharactersLeft);
 end;
 

@@ -211,6 +211,7 @@ begin
     Columns[6].Width := 150;
     Columns[7].Width := 200;
     Columns[8].Width := 100;
+    Columns[9].Width := 150;
   end;
 
   if cmbSearch.ItemIndex = -1 then
@@ -743,6 +744,7 @@ begin
         Columns[6].Width := 150;
         Columns[7].Width := 200;
         Columns[8].Width := 100;
+        Columns[9].Width := 150;
       end;
     end;
   end;

@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Menus, JPEG, clsValidation, dbPAT2022,
-  clsFormatCalculations;
+  clsFormatCalculations, Vcl.WinXPickers;
 
 type
   TfrmRegister = class(TForm)
@@ -47,6 +47,9 @@ type
     Panel8: TPanel;
     Label3: TLabel;
     lblBio: TLabel;
+    Panel9: TPanel;
+    Label4: TLabel;
+    dpkBirthday: TDatePicker;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -283,6 +286,7 @@ begin
       tblStudents['PhoneNumber'] := edtPhoneNumberR.Text;
       tblStudents['Bio'] := redBioR.Text;
       tblStudents['ProfilePicture'] := sPfp;
+      tblStudents['Birthday'] := dpkBirthday.Date;
       tblStudents.Post;
       tblStudents.Refresh;
     end;
@@ -362,6 +366,7 @@ begin
   Panel6.Color := Secondary;
   Panel7.Color := primary;
   Panel8.Color := primary;
+  Panel9.Color := primary;
 
   // Edit Boxes
 
@@ -392,8 +397,16 @@ begin
   Label2.Font.Color := Secondary;
   Label3.Font.Color := Secondary;
   Label3.Color := primary;
+  Label4.Font.Color := Secondary;
   lblPfp.Font.Color := Secondary;
   lblMaxCharacters.Font.Color := Secondary;
+
+  dpkBirthday.Font.Color := Secondary;
+  dpkBirthday.Color := primary;
+  dpkBirthday.HighlightColor := primary;
+  dpkBirthday.PopupColor := PrimaryBrighter;
+  dpkBirthday.SelectionColor := primary;
+  dpkBirthday.SelectionFontColor := Secondary;
 
   lblNameError.Color := primary;
   lblNameError.Font.Color := Secondary;
@@ -442,6 +455,10 @@ begin
   pfp5.Cursor := crHandPoint;
   pfp5.Proportional := true;
 
+
+  // Other
+
+  dpkBirthday.Date := now;
 end;
 
 procedure TfrmRegister.pfp1Click(Sender: TObject);

@@ -424,14 +424,14 @@ object frmProfile: TfrmProfile
         Left = 8
         Top = 64
         Width = 201
-        Height = 217
+        Height = 161
         BevelOuter = bvNone
         Color = 9128543
         ParentBackground = False
         TabOrder = 1
         object lblMaxCharacters: TLabel
           Left = 8
-          Top = 191
+          Top = 135
           Width = 106
           Height = 17
           Caption = 'lblMaxCharacters'
@@ -446,7 +446,7 @@ object frmProfile: TfrmProfile
           Left = 8
           Top = 8
           Width = 185
-          Height = 201
+          Height = 145
           BorderStyle = bsNone
           Color = 11759493
           EditMargins.Left = 3
@@ -479,6 +479,30 @@ object frmProfile: TfrmProfile
         ParentFont = False
         TabOrder = 2
         OnClick = bitChangeBioClick
+      end
+      object Panel18: TPanel
+        Left = 8
+        Top = 231
+        Width = 201
+        Height = 50
+        BevelOuter = bvNone
+        Color = 9128543
+        ParentBackground = False
+        TabOrder = 3
+        object dpkBirthday: TDatePicker
+          Left = 8
+          Top = 8
+          Width = 185
+          Date = 44775.000000000000000000
+          DateFormat = 'dd/mmm/yyyy'
+          Enabled = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          TabOrder = 0
+        end
       end
     end
     object Panel16: TPanel

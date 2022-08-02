@@ -313,6 +313,7 @@ begin
           Parent := arrReviewPanels[i];
           readOnly := true;
           Text := tblCourseReviews['Review'];
+          ScrollBars := ssVertical;
           color := PrimaryBrighter;
           Font.color := Secondary;
           Font.Style := [fsBold];
@@ -510,6 +511,7 @@ begin
           Parent := arrReviewPanels[i];
           readOnly := true;
           Text := tblUniversityReviews['Review'];
+          ScrollBars := ssVertical;
           color := PrimaryBrighter;
           Font.color := Secondary;
           Font.Style := [fsBold];
