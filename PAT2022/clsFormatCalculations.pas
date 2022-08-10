@@ -311,7 +311,7 @@ begin
         with arrCReview[i] do
         begin
           Parent := arrReviewPanels[i];
-          readOnly := true;
+          ReadOnly := true;
           Text := tblCourseReviews['Review'];
           ScrollBars := ssVertical;
           color := PrimaryBrighter;

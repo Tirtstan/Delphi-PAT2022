@@ -261,6 +261,7 @@ object frmCourseBrowser: TfrmCourseBrowser
           Top = 9
           Width = 179
           Height = 32
+          BiDiMode = bdLeftToRight
           Caption = 'Course Browser'
           Color = 4822522
           Font.Charset = DEFAULT_CHARSET
@@ -268,6 +269,7 @@ object frmCourseBrowser: TfrmCourseBrowser
           Font.Height = -24
           Font.Name = 'Segoe UI'
           Font.Style = [fsBold, fsUnderline]
+          ParentBiDiMode = False
           ParentColor = False
           ParentFont = False
         end
