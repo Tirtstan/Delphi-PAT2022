@@ -460,7 +460,7 @@ begin
 
   spnWeeks.Value := 1;
   redFee.Clear;
-  redReview.MaxLength := 255;
+  redReview.MaxLength := 240;
   bitWriteReview.Enabled := true;
   bitDeleteReview.Enabled := false;
 
@@ -645,7 +645,7 @@ procedure TfrmCourseInfo.redReviewChange(Sender: TObject);
 var
   iCharactersLeft: Integer;
 begin
-  iCharactersLeft := 255 - (length(redReview.Text));
+  iCharactersLeft := 240 - (length(redReview.Text));
   lblMaxCharacters.Caption := 'Characters Left: ' + IntToStr(iCharactersLeft);
 end;
 

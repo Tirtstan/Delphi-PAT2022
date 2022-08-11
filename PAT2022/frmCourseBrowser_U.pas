@@ -72,8 +72,10 @@ var
     '17.png',
     '18.jpg'
   );
-  arrCourseLabels: array of TLabel;
+  arrCourseLabels, arrCourseLength: array of TLabel;
   arrCoursePanels: array of TPanel;
+  arrCourseDescriptions: array of TRichEdit;
+  arrCourseImg: array of TImage;
   iUniversityID, iCourseID: Integer;
   sUniversity, sCourseName: string;
 
@@ -120,7 +122,6 @@ begin
   frmCourseBrowser.Position := poScreenCenter;
 
   iUniversityID := 0;
-  iCourseID := 0;
 
   ScrollBox1.VertScrollBar.Range := ScrollBox1.VertScrollBar.Range + 100;
 end;
@@ -133,6 +134,7 @@ var
 begin
 
   // Other
+  iCourseID := 0;
 
   ScrollBox1.VertScrollBar.Visible := True;
   ScrollBox1.VertScrollBar.Smooth := True;
@@ -153,19 +155,30 @@ begin
 
     SetLength(arrCourseLabels, tblCourses.RecordCount + 1);
     SetLength(arrCoursePanels, tblCourses.RecordCount + 1);
+    SetLength(arrCourseDescriptions, tblCourses.RecordCount + 1);
+    SetLength(arrCourseLength, tblCourses.RecordCount + 1);
+    SetLength(arrCourseImg, tblCourses.RecordCount + 1);
 
     // Deletes previous objects and reloads
 
     for I := 0 to tblCourses.RecordCount do
     begin
+      arrCourseImg[I].Free;
+      arrCourseLength[I].Free;
+      arrCourseDescriptions[I].Free;
       arrCourseLabels[I].Free;
       arrCoursePanels[I].Free;
     end;
 
     for I := 1 to tblCourses.RecordCount do
     begin
+      inc(iCourseID); // for FindCourseDescriptions
+
       arrCoursePanels[I] := TPanel.Create(frmCourseBrowser);
       arrCourseLabels[I] := TLabel.Create(frmCourseBrowser);
+      arrCourseDescriptions[I] := TRichEdit.Create(frmCourseBrowser);
+      arrCourseLength[I] := TLabel.Create(frmCourseBrowser);
+      arrCourseImg[I] := TImage.Create(frmCourseBrowser);
 
       with arrCoursePanels[I] do
       begin
@@ -191,13 +204,61 @@ begin
         Font.Color := Secondary;
         Font.Size := 16;
         AutoSize := True;
-        Left := 10;
-        Top := 27;
+        Left := 80;
+        Top := 4;
 
         onClick := lblCourseClick;
         OnMouseEnter := lblCourseOnMouseEnter;
         OnMouseLeave := lblCourseOnMouseLeave;
 
+      end;
+
+      with arrCourseDescriptions[I] do
+      begin
+        Parent := arrCoursePanels[I];
+        ParentBackground := false;
+        ReadOnly := True;
+        Text := objFormatCalculations.FindCourseDescription;
+        ScrollBars := ssVertical;
+        WordWrap := True;
+        Tag := I;
+        Color := Primarybrighter;
+        BorderStyle := bsNone;
+        EditMargins.Left := 3;
+        EditMargins.right := 3;
+        Font.Color := Secondary;
+        Font.Style := [fsBold];
+        Font.Size := 10;
+        Top := arrCourseLabels[I].Height + 5;
+        Width := 615;
+        Height := 40;
+        Left := 80;
+      end;
+
+      with arrCourseLength[I] do
+      begin
+        Parent := arrCoursePanels[I];
+        ParentBackground := false;
+        Caption := tblCourses['CourseLength'];
+        Alignment := taRightJustify;
+        AutoSize := True;
+        Top := 4;
+        Left := arrCoursePanels[I].Width - arrCourseLength[I].Width - 8;
+        Font.Color := Secondary;
+        Font.Size := 12;
+      end;
+
+      with arrCourseImg[I] do
+      begin
+        Parent := arrCoursePanels[I];
+        Proportional := True;
+        Center := True;
+        Picture.LoadFromFile(arrCoursePictures[I]);
+        Left := 4;
+        Top := 4;
+        Height := arrCoursePanels[I].Height - 8;
+        Width := arrCourseLabels[I].Left - 8;
+        Transparent := True;
       end;
       tblCourses.Next;
     end;
@@ -227,7 +288,7 @@ begin
   lblFee.Font.Color := Secondary;
 
   redDescription.Font.Color := Secondary;
-  redDescription.Color := PrimaryBrighter;
+  redDescription.Color := Primarybrighter;
 
   // Other
 
@@ -281,7 +342,7 @@ var
   I: Integer;
 begin
   objFormatCalculations.MouseLeaveLabel(Sender AS TLabel);
-  (Sender AS TLabel).Font.Style := [FsBold];
+  (Sender AS TLabel).Font.Style := [fsBold];
 end;
 
 procedure TfrmCourseBrowser.lblUniversityClick(Sender: TObject);

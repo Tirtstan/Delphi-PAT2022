@@ -44,6 +44,7 @@ type
     btnSQLPreset: TButton;
     lstSQL: TListBox;
     Panel8: TPanel;
+    btnClearSQL: TButton;
     procedure FormCreate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure btnStudentsClick(Sender: TObject);
@@ -66,6 +67,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure lstSQLClick(Sender: TObject);
     procedure btnSQLPresetClick(Sender: TObject);
+    procedure btnClearSQLClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -209,6 +211,7 @@ begin
     Columns[6].Width := 150;
     Columns[7].Width := 200;
     Columns[8].Width := 100;
+    Columns[9].Width := 150;
   end;
 
   if cmbSearch.ItemIndex = -1 then
@@ -461,6 +464,11 @@ procedure TfrmAdminPage.btnBackClick(Sender: TObject);
 begin
   frmAdminPage.Hide;
   frmBrowserChooser.Show;
+end;
+
+procedure TfrmAdminPage.btnClearSQLClick(Sender: TObject);
+begin
+  redSQL.Clear;
 end;
 
 procedure TfrmAdminPage.btnCourseReviewsClick(Sender: TObject);
@@ -736,6 +744,7 @@ begin
         Columns[6].Width := 150;
         Columns[7].Width := 200;
         Columns[8].Width := 100;
+        Columns[9].Width := 150;
       end;
     end;
   end;

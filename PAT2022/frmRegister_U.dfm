@@ -305,16 +305,16 @@ object frmRegister: TfrmRegister
     end
     object Panel4: TPanel
       Left = 8
-      Top = 91
+      Top = 94
       Width = 369
-      Height = 204
+      Height = 124
       BevelOuter = bvNone
       Color = 9128543
       ParentBackground = False
       TabOrder = 0
       object lblMaxCharacters: TLabel
         Left = 8
-        Top = 176
+        Top = 101
         Width = 123
         Height = 17
         Caption = 'Max Characters: 255'
@@ -342,7 +342,7 @@ object frmRegister: TfrmRegister
         Left = 8
         Top = 29
         Width = 353
-        Height = 141
+        Height = 66
         Hint = 'Enter a bio... (255 Max Characters)'
         BorderStyle = bsNone
         Color = 11759493
@@ -356,6 +356,7 @@ object frmRegister: TfrmRegister
         MaxLength = 255
         ParentFont = False
         ParentShowHint = False
+        ScrollBars = ssVertical
         ShowHint = True
         TabOrder = 0
         OnChange = redBioRChange
@@ -477,6 +478,47 @@ object frmRegister: TfrmRegister
         ParentFont = False
         TabOrder = 0
         TextHint = 'Enter a phone number...'
+      end
+    end
+    object Panel9: TPanel
+      Left = 8
+      Top = 224
+      Width = 369
+      Height = 65
+      BevelOuter = bvNone
+      Color = 9128543
+      ParentBackground = False
+      TabOrder = 3
+      object Label4: TLabel
+        Left = 8
+        Top = 0
+        Width = 124
+        Height = 17
+        Caption = 'Enter your birthday:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4822522
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
+      object dpkBirthday: TDatePicker
+        Left = 8
+        Top = 23
+        Width = 353
+        Color = 9128543
+        Date = 44775.000000000000000000
+        DateFormat = 'dd/mmm/yyyy'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 4822522
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        HighlightColor = 9128543
+        PopupColor = 11759493
+        SelectionColor = 9128543
+        SelectionFontColor = 4822522
+        TabOrder = 0
       end
     end
   end

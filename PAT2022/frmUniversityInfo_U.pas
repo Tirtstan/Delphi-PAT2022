@@ -63,6 +63,7 @@ type
     procedure lblUniTitleMouseLeave(Sender: TObject);
     procedure cmbSortChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure CheckEligibility();
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -164,6 +165,8 @@ begin
     bitWriteReview.Caption := 'Edit Review';
     bitWriteReview.Enabled := true;
     bitDeleteReview.Enabled := true;
+
+    CheckEligibility;
   end;
 end;
 
@@ -366,6 +369,29 @@ begin
 
 end;
 
+procedure TfrmUniversityInfo.CheckEligibility;
+begin
+  with dbmPAT2022 do
+  begin
+    tblUniversityReviews.First;
+    while NOT(tblUniversityReviews.Eof) do
+    begin
+      if tblUniversityReviews['UniversityID'] = iUniversityID then
+      begin
+        if (tblUniversityReviews['StudentID'] = iStudentID) then
+        begin
+          // bitWriteReview.Enabled := false;
+          bitWriteReview.Kind := bkRetry;
+          bitWriteReview.Caption := 'Edit Review';
+          bitDeleteReview.Enabled := true;
+          break;
+        end;
+      end;
+      tblUniversityReviews.Next;
+    end;
+  end;
+end;
+
 procedure TfrmUniversityInfo.cmbSortChange(Sender: TObject);
 begin
   lblRating.Caption := objFormatCalculations.CreateReviewsUni(Panel8,
@@ -473,7 +499,7 @@ begin
 
   // Other stuff
 
-  redReview.MaxLength := 255;
+  redReview.MaxLength := 240;
   iUniversityID := 0;
   bitWriteReview.Enabled := true;
   bitDeleteReview.Enabled := false;
@@ -554,25 +580,7 @@ begin
   lblRating.Caption := 'Rating: ' + lblRating.Caption;
 
   // SCARY \/
-  with dbmPAT2022 do
-  begin
-    tblUniversityReviews.First;
-    while NOT(tblUniversityReviews.Eof) do
-    begin
-      if tblUniversityReviews['UniversityID'] = iUniversityID then
-      begin
-        if (tblUniversityReviews['StudentID'] = iStudentID) then
-        begin
-          // bitWriteReview.Enabled := false;
-          bitWriteReview.Kind := bkRetry;
-          bitWriteReview.Caption := 'Edit Review';
-          bitDeleteReview.Enabled := true;
-          break;
-        end;
-      end;
-      tblUniversityReviews.Next;
-    end;
-  end;
+  CheckEligibility;
   // SCARY ^ DON'T TOUCH
 
   // Admin stuff
@@ -634,7 +642,7 @@ procedure TfrmUniversityInfo.redReviewChange(Sender: TObject);
 var
   iCharactersLeft: Integer;
 begin
-  iCharactersLeft := 255 - (length(redReview.Text));
+  iCharactersLeft := 240 - (length(redReview.Text));
   lblMaxCharacters.Caption := 'Characters Left: ' + IntToStr(iCharactersLeft);
 end;
 

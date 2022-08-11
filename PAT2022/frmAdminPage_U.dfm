@@ -163,9 +163,9 @@ object frmAdminPage: TfrmAdminPage
           ParentBackground = False
           TabOrder = 3
           object btnSQLCustom: TButton
-            Left = 8
+            Left = 9
             Top = 8
-            Width = 257
+            Width = 125
             Height = 49
             Caption = 'Execute'
             Font.Charset = DEFAULT_CHARSET
@@ -176,6 +176,21 @@ object frmAdminPage: TfrmAdminPage
             ParentFont = False
             TabOrder = 0
             OnClick = btnSQLCustomClick
+          end
+          object btnClearSQL: TButton
+            Left = 140
+            Top = 8
+            Width = 125
+            Height = 49
+            Caption = 'Clear'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = 4822522
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            OnClick = btnClearSQLClick
           end
         end
       end
@@ -308,7 +323,7 @@ object frmAdminPage: TfrmAdminPage
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
-        TextHint = 'Choose a column...'
+        TextHint = 'Choose a field...'
         OnChange = cmbSearchChange
         OnClick = cmbSearchClick
       end
