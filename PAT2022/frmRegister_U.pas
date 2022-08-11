@@ -155,11 +155,13 @@ begin
     begin
       lblEmailError.Font.Color := clLime;
       lblEmailError.Caption := 'Vaild Email.';
+      bEmailDatabase := true;
     end
     else
     begin
       lblEmailError.Font.Color := SecondaryBrighter;
       lblEmailError.Caption := 'Valid email but taken.';
+      bEmailDatabase := false;
     end;
 
   end
@@ -201,11 +203,13 @@ begin
     begin
       lblIDError.Font.Color := clLime;
       lblIDError.Caption := 'Vaild ID.';
+      bIDDatabase := true;
     end
     else
     begin
       lblIDError.Font.Color := SecondaryBrighter;
       lblIDError.Caption := 'Valid ID but taken.';
+      bIDDatabase := false;
     end;
 
   end
@@ -231,11 +235,13 @@ begin
     begin
       lblPhoneNumberError.Font.Color := clLime;
       lblPhoneNumberError.Caption := 'Vaild Phone Number.';
+      bPhoneNumberDatabase := true;
     end
     else
     begin
       lblPhoneNumberError.Font.Color := SecondaryBrighter;
       lblPhoneNumberError.Caption := 'Valid phone number but taken.';
+      bPhoneNumberDatabase := false;
     end;
 
   end
