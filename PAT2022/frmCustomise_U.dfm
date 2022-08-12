@@ -18,8 +18,9 @@ object frmCustomise: TfrmCustomise
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 977
-    Height = 693
+    Width = 967
+    Height = 576
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     Font.Charset = DEFAULT_CHARSET
@@ -30,11 +31,15 @@ object frmCustomise: TfrmCustomise
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitLeft = -8
     object Panel2: TPanel
       Left = 16
       Top = 64
       Width = 289
       Height = 393
+      Align = alCustom
+      Alignment = taLeftJustify
+      Anchors = []
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
@@ -186,6 +191,8 @@ object frmCustomise: TfrmCustomise
       Top = 484
       Width = 321
       Height = 65
+      Align = alCustom
+      Anchors = []
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
@@ -238,6 +245,8 @@ object frmCustomise: TfrmCustomise
       Top = 128
       Width = 290
       Height = 329
+      Align = alCustom
+      Anchors = []
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
@@ -326,6 +335,8 @@ object frmCustomise: TfrmCustomise
       Top = 64
       Width = 290
       Height = 58
+      Align = alCustom
+      Anchors = []
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False
@@ -353,6 +364,9 @@ object frmCustomise: TfrmCustomise
       Top = 64
       Width = 296
       Height = 393
+      Align = alCustom
+      Alignment = taRightJustify
+      Anchors = []
       BevelOuter = bvNone
       Color = 4822522
       ParentBackground = False

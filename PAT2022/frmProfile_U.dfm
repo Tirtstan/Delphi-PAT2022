@@ -18,12 +18,15 @@ object frmProfile: TfrmProfile
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 545
-    Height = 737
+    Width = 518
+    Height = 664
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 545
+    ExplicitHeight = 737
     object Panel2: TPanel
       Left = 288
       Top = 20

@@ -24,6 +24,9 @@ type
     Panel3: TPanel;
     Button1: TButton;
     Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure btnHelpClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -128,6 +131,9 @@ begin
   redHelp.Font.Color := Secondary;
   Panel3.Color := Primary;
   Panel4.Color := Primary;
+  Panel5.Color := Secondary;
+  Panel6.Color := Secondary;
+  Panel7.Color := Primary;
 
   Label1.Font.Color := Secondary;
   Label2.Font.Color := Secondary;

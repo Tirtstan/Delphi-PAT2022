@@ -17,13 +17,17 @@ object frmRegister: TfrmRegister
   TextHeight = 25
   object Panel1: TPanel
     Left = 0
-    Top = -6
-    Width = 1129
-    Height = 741
+    Top = 0
+    Width = 1123
+    Height = 735
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = -6
+    ExplicitWidth = 1129
+    ExplicitHeight = 741
     object Label1: TLabel
       Left = 464
       Top = 48
