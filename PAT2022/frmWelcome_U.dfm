@@ -31,8 +31,6 @@ object frmWelcome: TfrmWelcome
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = -5
-    ExplicitWidth = 1110
     object Label1: TLabel
       Left = 416
       Top = 170
@@ -93,8 +91,6 @@ object frmWelcome: TfrmWelcome
       Color = 4822522
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 432
-      ExplicitTop = 396
       object Panel3: TPanel
         AlignWithMargins = True
         Left = 9
@@ -110,10 +106,6 @@ object frmWelcome: TfrmWelcome
         Color = 9128543
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 4
-        ExplicitTop = 4
-        ExplicitWidth = 241
-        ExplicitHeight = 178
         object btnLogin1: TButton
           Left = 13
           Top = 16
@@ -211,7 +203,6 @@ object frmWelcome: TfrmWelcome
       Color = 4822522
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 8
       object btnHelp: TButton
         Left = 9
         Top = 9
@@ -247,7 +238,6 @@ object frmWelcome: TfrmWelcome
       ParentBackground = False
       TabOrder = 1
       VerticalAlignment = taAlignBottom
-      ExplicitTop = 78
       object Panel4: TPanel
         Left = 8
         Top = 7

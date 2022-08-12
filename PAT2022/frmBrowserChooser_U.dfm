@@ -18,8 +18,9 @@ object frmBrowserChooser: TfrmBrowserChooser
   object pnlChoose: TPanel
     Left = 0
     Top = 0
-    Width = 1121
-    Height = 721
+    Width = 1119
+    Height = 720
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     Font.Charset = DEFAULT_CHARSET
@@ -30,6 +31,8 @@ object frmBrowserChooser: TfrmBrowserChooser
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1121
+    ExplicitHeight = 721
     object Label1: TLabel
       Left = 456
       Top = 40

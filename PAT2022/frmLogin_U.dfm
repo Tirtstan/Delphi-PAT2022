@@ -19,7 +19,8 @@ object frmLogin: TfrmLogin
     Left = 0
     Top = 0
     Width = 1121
-    Height = 737
+    Height = 736
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     Font.Charset = DEFAULT_CHARSET
@@ -30,6 +31,7 @@ object frmLogin: TfrmLogin
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 737
     object Label1: TLabel
       Left = 494
       Top = 120

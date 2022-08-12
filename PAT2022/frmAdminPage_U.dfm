@@ -16,14 +16,18 @@ object frmAdminPage: TfrmAdminPage
   PixelsPerInch = 96
   TextHeight = 15
   object Panel1: TPanel
-    Left = -1
+    Left = 0
     Top = 0
-    Width = 1130
-    Height = 737
+    Width = 1112
+    Height = 707
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     ParentBackground = False
     TabOrder = 1
+    ExplicitLeft = -1
+    ExplicitWidth = 1130
+    ExplicitHeight = 737
     object Panel10: TPanel
       Left = 780
       Top = 80

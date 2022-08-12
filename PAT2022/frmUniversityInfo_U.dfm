@@ -19,12 +19,15 @@ object frmUniversityInfo: TfrmUniversityInfo
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1113
-    Height = 721
+    Width = 1109
+    Height = 718
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1113
+    ExplicitHeight = 721
     object Panel2: TPanel
       Left = 43
       Top = 68

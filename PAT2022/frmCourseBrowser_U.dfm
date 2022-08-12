@@ -18,8 +18,9 @@ object frmCourseBrowser: TfrmCourseBrowser
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1121
-    Height = 737
+    Width = 1122
+    Height = 725
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     Font.Charset = DEFAULT_CHARSET
@@ -30,6 +31,8 @@ object frmCourseBrowser: TfrmCourseBrowser
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1121
+    ExplicitHeight = 737
     object ScrollBox1: TScrollBox
       Left = 111
       Top = 92

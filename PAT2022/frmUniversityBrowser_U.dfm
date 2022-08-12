@@ -18,8 +18,9 @@ object frmUniversityBrowser: TfrmUniversityBrowser
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1127
-    Height = 729
+    Width = 1115
+    Height = 721
+    Align = alClient
     BevelOuter = bvNone
     Color = 9128543
     Font.Charset = DEFAULT_CHARSET
@@ -30,6 +31,8 @@ object frmUniversityBrowser: TfrmUniversityBrowser
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1127
+    ExplicitHeight = 729
     object Panel4: TPanel
       Left = 117
       Top = 8
