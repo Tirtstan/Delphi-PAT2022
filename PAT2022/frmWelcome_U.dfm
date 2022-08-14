@@ -222,8 +222,8 @@ object frmWelcome: TfrmWelcome
       end
     end
     object Panel2: TPanel
-      Left = 8
-      Top = 88
+      Left = 9
+      Top = 82
       Width = 296
       Height = 177
       Margins.Left = 100

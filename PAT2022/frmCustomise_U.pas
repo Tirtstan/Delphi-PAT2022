@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.Edge, clsFormatCalculations, Vcl.Buttons, VCLTee.TeCanvas;
+  Vcl.ComCtrls, clsFormatCalculations, Vcl.Buttons, VCLTee.TeCanvas;
 
 type
   TfrmCustomise = class(TForm)

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.WinXCtrls, Vcl.StdCtrls,
-  Vcl.ExtCtrls, Vcl.ControlList, Vcl.VirtualImage, Vcl.OleCtrls, SHDocVw,
+  Vcl.ExtCtrls, Vcl.ControlList, Vcl.OleCtrls,
   Vcl.ComCtrls, Vcl.Buttons, clsFormatCalculations, VCLTee.TeCanvas;
 
 type

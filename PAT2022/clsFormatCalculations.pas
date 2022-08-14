@@ -12,6 +12,7 @@ type
   TFormatCalculation = class(TObject)
   private
     { private declarations }
+
   public
     procedure MouseEnterLabel(sample: TLabel);
     procedure MouseLeaveLabel(sample: TLabel);
@@ -70,7 +71,6 @@ begin
 end;
 
 function TFormatCalculation.CountCourseReviewAmount: integer;
-
 var
   iCount: integer;
 begin
@@ -95,7 +95,6 @@ begin
 end;
 
 function TFormatCalculation.CountUniReviewAmount: integer;
-
 var
   iCount: integer;
 begin

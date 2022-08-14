@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.ComCtrls, Vcl.Buttons, dbPAT2022, JPEG, clsFormatCalculations,
-  Vcl.Samples.Spin, VCLTee.TeCanvas, Math;
+  Vcl.Samples.Spin, VCLTee.TeCanvas, Math, clsReviews;
 
 type
   TfrmCourseInfo = class(TForm)
@@ -78,6 +78,7 @@ type
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
+    objReviews: TReviews;
     iCourseReviewID, iArrayLength: Integer;
     rRating: real;
     sCourseRating: string;
@@ -91,7 +92,6 @@ var
 implementation
 
 uses
-
   frmCourseBrowser_U, frmUniversityInfo_U, frmUniversityBrowser_U, frmLogin_U,
   frmProfile_U, frmCustomise_U;
 
@@ -147,11 +147,14 @@ begin
 
     // Reload here
     Panel8.Height := 497;
-    lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
-      frmCourseInfo, cmbSort);
+
+    objReviews := TReviews.Create(frmCourseInfo, Panel8, cmbSort,
+      dbmPAT2022.tblCourseReviews, iCourseID);
+    objReviews.CreateReviews;
+    lblRating.Caption := objReviews.GetRating;
 
     Label4.Caption := 'Course''s Reviews: ' + ' (' +
-      IntToStr(objFormatCalculations.CountCourseReviewAmount) + ')';
+      IntToStr(objReviews.CountReviewAmount) + ')';
 
     // Updating rating visual
 
@@ -221,12 +224,13 @@ begin
       bitDeleteReview.Enabled := false;
 
       // Reloading reviews
+      objReviews := TReviews.Create(frmCourseInfo, Panel8, cmbSort,
+        dbmPAT2022.tblCourseReviews, iCourseID);
+      objReviews.CreateReviews;
+      lblRating.Caption := objReviews.GetRating;
 
-      lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
-        frmCourseInfo, cmbSort);
-
-      Label4.Caption := 'Course''s Reviews: ' + ' (' +
-        IntToStr(objFormatCalculations.CountCourseReviewAmount) + ')';
+      Label4.Caption := 'Course''s Reviews: ' + '(' +
+        IntToStr(objReviews.CountReviewAmount) + ')';
 
       // Reloading visual
 
@@ -358,8 +362,13 @@ end;
 
 procedure TfrmCourseInfo.cmbSortChange(Sender: TObject);
 begin
-  lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
-    frmCourseInfo, cmbSort);
+  objReviews := TReviews.Create(frmCourseInfo, Panel8, cmbSort,
+    dbmPAT2022.tblCourseReviews, iCourseID);
+  objReviews.CreateReviews;
+  lblRating.Caption := objReviews.GetRating;
+
+  Label4.Caption := 'Course''s Reviews: ' + '(' +
+    IntToStr(objReviews.CountReviewAmount) + ')';
 end;
 
 procedure TfrmCourseInfo.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -394,11 +403,22 @@ begin
 
   // Function for creating the reviews
   cmbSort.ItemIndex := 0;
-  lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
-    frmCourseInfo, cmbSort);
 
-  Label4.Caption := 'Course''s Reviews: ' + ' (' +
-    IntToStr(objFormatCalculations.CountCourseReviewAmount) + ')';
+  // lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
+  // frmCourseInfo, cmbSort);
+
+  objReviews := TReviews.Create(frmCourseInfo, Panel8, cmbSort,
+    dbmPAT2022.tblCourseReviews, iCourseID);
+  objReviews.CreateReviews;
+  lblRating.Caption := objReviews.GetRating;
+
+  Label4.Caption := 'Course''s Reviews: ' + '(' +
+    IntToStr(objReviews.CountReviewAmount) + ')';
+
+  // Label4.Caption := 'Course''s Reviews: ' + ' (' +
+  // IntToStr(objFormatCalculations.CountCourseReviewAmount) + ')';
+
+
 
   // Colour Scheme
 
