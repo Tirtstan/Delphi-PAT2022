@@ -28,6 +28,7 @@ type
     procedure lblNameClick(Sender: TObject);
     procedure lblNameMouseEnter(Sender: TObject);
     procedure lblNameMouseLeave(Sender: TObject);
+    procedure DeleteBtnClick(Sender: TObject);
   end;
 
 implementation
@@ -302,7 +303,7 @@ begin
             Caption := 'Delete Review';
             Tag := fTADOTable[fID];
 
-            // OnClick := DeleteBtnClickCourse;
+            OnClick := DeleteBtnClick;
           end;
         end;
 
@@ -326,6 +327,40 @@ begin
   fRating := rRatingTotal / rCount;
 
   ScrollBox.VertScrollBar.Range := iTopPanel + 30;
+end;
+
+procedure TReviews.DeleteBtnClick(Sender: TObject);
+var
+  iYesOrNo: integer;
+begin
+  iYesOrNo := MessageDlg('Are you sure you want to delete this review?',
+    mtConfirmation, [mbYes, mbNo], 0, mbYes);
+
+  if iYesOrNo = mrYes then
+  begin
+    with dbmPAT2022 do
+    begin
+      fTADOTable.First;
+
+      while NOT(fTADOTable.Eof) do
+      begin
+        if (Sender AS TBitBtn).Tag = fTADOTable[fID] then
+        begin
+          fTADOTable.Delete;
+          fTADOTable.Refresh;
+
+          ShowMessage('Review Deleted! Refresh form to see changes.');
+          break;
+        end;
+        fTADOTable.Next;
+      end;
+    end;
+  end
+  else
+  begin
+    exit;
+  end;
+
 end;
 
 function TReviews.GetRating: string;

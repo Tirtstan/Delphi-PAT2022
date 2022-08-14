@@ -192,7 +192,7 @@ object frmWelcome: TfrmWelcome
     ParentBackground = False
     TabOrder = 1
     object Panel6: TPanel
-      Left = 8
+      Left = 9
       Top = 11
       Width = 121
       Height = 65
