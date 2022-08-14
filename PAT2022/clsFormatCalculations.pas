@@ -30,15 +30,6 @@ type
     function FindPrimaryBrighter(var tFile: Textfile): TColor;
     function FindSecondary(var tFile: Textfile): TColor;
     function FindSecondaryBrighter(var tFile: Textfile): TColor;
-    function CountCourseReviewAmount(): integer;
-    function CountUniReviewAmount(): integer;
-    function CreateReviews(pnlParent: Tpanel; frmOwner: TForm;
-      cmbSort: TComboBox): string;
-    function CreateReviewsUni(pnlParent: Tpanel; frmOwner: TForm;
-      cmbSort: TComboBox): string;
-    procedure lblNameMouseEnter(Sender: TObject);
-    procedure lblNameMouseLeave(Sender: TObject);
-    procedure lblNameClick(Sender: TObject);
     procedure DeleteBtnClick(Sender: TObject);
     procedure DeleteBtnClickCourse(Sender: TObject);
     function AllowedEmailDatabase(sText: string): boolean;
@@ -70,54 +61,6 @@ begin
   result := rWeeks * StrToFloat(sFee);
 end;
 
-function TFormatCalculation.CountCourseReviewAmount: integer;
-var
-  iCount: integer;
-begin
-  with dbmPAT2022 do
-  begin
-    tblCourseReviews.Open;
-    tblCourseReviews.First;
-
-    // Displaying all info for the courses
-    iCount := 0;
-
-    while NOT(tblCourseReviews.Eof) do
-    begin
-      if tblCourseReviews['CourseID'] = iCourseID then
-      begin
-        inc(iCount);
-      end;
-      tblCourseReviews.Next;
-    end;
-  end;
-  result := iCount;
-end;
-
-function TFormatCalculation.CountUniReviewAmount: integer;
-var
-  iCount: integer;
-begin
-  with dbmPAT2022 do
-  begin
-    tblUniversityReviews.Open;
-    tblUniversityReviews.First;
-
-    // Dispalying all info for the courses
-    iCount := 0;
-
-    while NOT(tblUniversityReviews.Eof) do
-    begin
-      if tblUniversityReviews['UniversityID'] = iUniversityID then
-      begin
-        inc(iCount);
-      end;
-      tblUniversityReviews.Next;
-    end;
-  end;
-  result := iCount;
-end;
-
 procedure TFormatCalculation.CourseBrowserInfo(course: TLabel);
 begin
   with dbmPAT2022 do
@@ -125,499 +68,6 @@ begin
     course.Caption := tblCourses['Course'];
     tblCourses.Next;
   end;
-end;
-
-function TFormatCalculation.CreateReviews(pnlParent: Tpanel; frmOwner: TForm;
-  cmbSort: TComboBox): string;
-var
-  i, iTopPanel, iArrayLength: integer;
-  sReviewerName, sStudentPfp: string;
-  rCount, rRatingTotal, rRating: real;
-  arrReviewPanels: array of Tpanel;
-  arrNameLabel, arrRatingDateLabel: array of TLabel;
-  arrPfp: array of TImage;
-  arrCReview: array of TRichEdit;
-  arrDeleteBtn: array of TBitBtn;
-  ScrollBox: TScrollbox;
-begin
-  // Creating (dynamically) all the reviews
-
-  // Creating scrollbox
-
-  ScrollBox := TScrollbox.Create(frmOwner);
-  with ScrollBox do
-  begin
-    Parent := pnlParent;
-    ParentBackground := false;
-    VertScrollBar.Position := 0;
-    Left := 8;
-    height := pnlParent.height - 42;
-    Width := 409;
-    Top := 34;
-    color := PrimaryBrighter;
-    BevelOuter := bvNone;
-    BevelKind := bKNone;
-    BevelInner := bvNone;
-    VertScrollBar.Tracking := true;
-    VertScrollBar.Smooth := true;
-    BorderStyle := bsNone;
-  end;
-
-  // Creating Reviews
-
-  // Dynamically creating the reviews (with actual clickable UI :O)
-
-  with dbmPAT2022 do
-  begin
-    tblCourseReviews.Open;
-
-    // Giving the arrays lengths (start at 0)
-
-    iArrayLength := 0;
-    iArrayLength := CountCourseReviewAmount;
-
-    SetLength(arrReviewPanels, iArrayLength + 1);
-    SetLength(arrNameLabel, iArrayLength + 1);
-    SetLength(arrRatingDateLabel, iArrayLength + 1);
-    SetLength(arrCReview, iArrayLength + 1);
-    SetLength(arrDeleteBtn, iArrayLength + 1);
-    SetLength(arrPfp, iArrayLength + 1);
-
-    // Freeing
-
-    for i := 0 to iArrayLength do
-    begin
-      arrPfp[i] := nil;
-      arrDeleteBtn[i] := nil;
-      arrNameLabel[i] := nil;
-      arrRatingDateLabel[i] := nil;
-      arrCReview[i] := nil;
-      arrReviewPanels[i] := nil;
-
-      arrPfp[i].Free;
-      arrDeleteBtn[i].Free;
-      arrNameLabel[i].Free;
-      arrRatingDateLabel[i].Free;
-      arrCReview[i].Free;
-      arrReviewPanels[i].Free;
-    end;
-    // Displaying all info for the courses
-
-    // Creating Part
-
-    iTopPanel := 15;
-    i := 0;
-
-    tblCourseReviews.First;
-    case cmbSort.ItemIndex of
-      - 1:
-        tblCourseReviews.Sort := 'ReviewDate DESC';
-      0:
-        tblCourseReviews.Sort := 'ReviewDate DESC';
-      1:
-        tblCourseReviews.Sort := 'ReviewDate ASC';
-      2:
-        tblCourseReviews.Sort := 'Rating DESC';
-      3:
-        tblCourseReviews.Sort := 'Rating ASC';
-    end;
-    while NOT(tblCourseReviews.Eof) do
-    begin
-      if tblCourseReviews['CourseID'] = iCourseID then
-      begin
-        inc(i);
-        rCount := rCount + 1;
-        rRatingTotal := rRatingTotal + tblCourseReviews['Rating'];
-
-        arrReviewPanels[i] := Tpanel.Create(frmOwner);
-        arrNameLabel[i] := TLabel.Create(frmOwner);
-        arrRatingDateLabel[i] := TLabel.Create(frmOwner);
-        arrCReview[i] := TRichEdit.Create(frmOwner);
-        arrDeleteBtn[i] := TBitBtn.Create(frmOwner);
-        arrPfp[i] := TImage.Create(frmOwner);
-
-        // Review Panel
-
-        with arrReviewPanels[i] do
-        begin
-          Parent := ScrollBox;
-          ParentBackground := false;
-          color := Primary;
-          Tag := i;
-          BevelOuter := bvNone;
-          height := 110;
-          Width := 376;
-          Left := 8;
-          Top := iTopPanel;
-        end;
-        inc(iTopPanel, 130);
-
-        // Name and Surname
-
-        tblStudents.First;
-        while NOT(tblStudents.Eof) do
-        begin
-          if tblStudents['StudentID'] = tblCourseReviews['StudentID'] then
-          begin
-            sReviewerName := tblStudents['StudentName'] + ' ' + tblStudents
-              ['Surname'];
-            sStudentPfp := tblStudents['ProfilePicture'];
-            iStudentIDTag := tblStudents['StudentID'];
-            if iStudentID = tblStudents['StudentID'] then
-            begin
-              sReviewerName := sReviewerName + ' (You)';
-            end;
-          end;
-          tblStudents.Next;
-        end;
-
-        with arrNameLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold, fsUnderline];
-          AutoSize := true;
-          Caption := sReviewerName;
-          Tag := iStudentIDTag;
-          Font.Size := 12;
-          Left := 55;
-          Top := 2;
-
-          OnClick := lblNameClick;
-          OnMouseEnter := lblNameMouseEnter;
-          OnMouseLeave := lblNameMouseLeave;
-
-        end;
-
-        // Rating and Date
-
-        with arrRatingDateLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          AutoSize := true;
-          Caption := DateToStr(tblCourseReviews['ReviewDate']) + ' | ' +
-            IntToStr(tblCourseReviews['Rating']) + '/5';
-          Tag := i;
-          Font.Size := 12;
-          Left := 55;
-          Top := 23;
-        end;
-
-        // Review
-
-        with arrCReview[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          ReadOnly := true;
-          Text := tblCourseReviews['Review'];
-          ScrollBars := ssVertical;
-          color := PrimaryBrighter;
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          Font.Size := 10;
-          BorderStyle := bsNone;
-          WordWrap := true;
-          EditMargins.Left := 3;
-          EditMargins.right := 3;
-          height := 54;
-          Width := 360;
-          Left := 8;
-          Top := 47;
-          Tag := tblCourseReviews['CReviewID'];
-        end;
-
-        // Delete Button
-
-        if iStudentID = 7 then
-        begin
-          with arrDeleteBtn[i] do
-          begin
-            Parent := arrReviewPanels[i];
-            height := 36;
-            Width := 120;
-            Left := 250;
-            Top := 6;
-            Kind := bkCancel;
-            Font.Size := 10;
-            Caption := 'Delete Review';
-            Tag := tblCourseReviews['CReviewID'];
-
-            OnClick := DeleteBtnClickCourse;
-          end;
-        end;
-
-        // Pfp
-
-        with arrPfp[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Proportional := true;
-          Center := true;
-          Picture.LoadFromFile(sStudentPfp);
-          Left := 5;
-          Top := 7;
-          Width := 50;
-          height := 35;
-        end;
-      end;
-      tblCourseReviews.Next;
-    end;
-    result := FloatToStrF(rRatingTotal / rCount, ffFixed, 8, 1);
-  end;
-
-  ScrollBox.VertScrollBar.Range := iTopPanel + 30;
-end;
-
-function TFormatCalculation.CreateReviewsUni(pnlParent: Tpanel; frmOwner: TForm;
-  cmbSort: TComboBox): string;
-var
-  i, iTopPanel, iArrayLength: integer;
-  sReviewerName, sStudentPfp: string;
-  rCount, rRatingTotal, rRating: real;
-  arrReviewPanels: array of Tpanel;
-  arrNameLabel: array of TLabel;
-  arrRatingDateLabel: array of TLabel;
-  arrPfp: array of TImage;
-  arrUReview: array of TRichEdit;
-  arrDeleteBtn: array of TBitBtn;
-  ScrollBox: TScrollbox;
-begin
-
-
-
-  // Creating (dynamically) all the reviews
-
-  // Creating scrollbox
-  ScrollBox := TScrollbox.Create(frmOwner);
-  with ScrollBox do
-  begin
-    Parent := pnlParent;
-    ParentBackground := false;
-    VertScrollBar.Position := 0;
-    Left := 8;
-    height := pnlParent.height - 42;
-    Width := 409;
-    Top := 34;
-    color := PrimaryBrighter;
-    BevelOuter := bvNone;
-    BevelKind := bKNone;
-    BevelInner := bvNone;
-    VertScrollBar.Tracking := true;
-    VertScrollBar.Smooth := true;
-    BorderStyle := bsNone;
-  end;
-
-  // Creating Reviews
-
-  // Dynamically creating the reviews (with actual clickable UI :O)
-
-  with dbmPAT2022 do
-  begin
-    tblUniversityReviews.Open;
-
-    // Giving the arrays lengths (start at 0)
-
-    iArrayLength := 0;
-    iArrayLength := CountUniReviewAmount;
-
-    SetLength(arrReviewPanels, iArrayLength + 1);
-    SetLength(arrNameLabel, iArrayLength + 1);
-    SetLength(arrRatingDateLabel, iArrayLength + 1);
-    SetLength(arrUReview, iArrayLength + 1);
-    SetLength(arrDeleteBtn, iArrayLength + 1);
-    SetLength(arrPfp, iArrayLength + 1);
-
-    // Freeing
-
-    for i := 0 to iArrayLength do
-    begin
-      arrPfp[i] := nil;
-      arrDeleteBtn[i] := nil;
-      arrNameLabel[i] := nil;
-      arrRatingDateLabel[i] := nil;
-      arrUReview[i] := nil;
-      arrReviewPanels[i] := nil;
-
-      arrPfp[i].Free;
-      arrDeleteBtn[i].Free;
-      arrNameLabel[i].Free;
-      arrRatingDateLabel[i].Free;
-      arrUReview[i].Free;
-      arrReviewPanels[i].Free;
-    end;
-
-    // Displaying all info for the courses
-
-    // Creating Part
-
-    iTopPanel := 15;
-    i := 0;
-
-    tblUniversityReviews.First;
-
-    // Combo Box sorting stuff
-
-    case cmbSort.ItemIndex of
-      - 1:
-        tblUniversityReviews.Sort := 'ReviewDate DESC';
-      0:
-        tblUniversityReviews.Sort := 'ReviewDate DESC';
-      1:
-        tblUniversityReviews.Sort := 'ReviewDate ASC';
-      2:
-        tblUniversityReviews.Sort := 'Rating DESC';
-      3:
-        tblUniversityReviews.Sort := 'Rating ASC';
-    end;
-
-    while NOT(tblUniversityReviews.Eof) do
-    begin
-      if tblUniversityReviews['UniversityID'] = iUniversityID then
-      begin
-        inc(i);
-        rCount := rCount + 1;
-        rRatingTotal := rRatingTotal + tblUniversityReviews['Rating'];
-
-        arrReviewPanels[i] := Tpanel.Create(frmOwner);
-        arrNameLabel[i] := TLabel.Create(frmOwner);
-        arrRatingDateLabel[i] := TLabel.Create(frmOwner);
-        arrUReview[i] := TRichEdit.Create(frmOwner);
-        arrDeleteBtn[i] := TBitBtn.Create(frmOwner);
-        arrPfp[i] := TImage.Create(frmOwner);
-
-        // Review Panel
-
-        with arrReviewPanels[i] do
-        begin
-          Parent := ScrollBox;
-          ParentBackground := false;
-          color := Primary;
-          Tag := i;
-          BevelOuter := bvNone;
-          height := 110;
-          Width := 376;
-          Left := 8;
-          Top := iTopPanel;
-        end;
-        inc(iTopPanel, 130);
-
-        // Review
-
-        with arrUReview[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          readOnly := true;
-          Text := tblUniversityReviews['Review'];
-          ScrollBars := ssVertical;
-          color := PrimaryBrighter;
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          Font.Size := 10;
-          BorderStyle := bsNone;
-          WordWrap := true;
-          EditMargins.Left := 3;
-          EditMargins.right := 3;
-          height := 54;
-          Width := 360;
-          Left := 8;
-          Top := 47;
-          Tag := tblUniversityReviews['UReviewID'];
-        end;
-
-        // Name and Surname
-
-        tblStudents.First;
-        while NOT(tblStudents.Eof) do
-        begin
-          if tblStudents['StudentID'] = tblUniversityReviews['StudentID'] then
-          begin
-            sReviewerName := tblStudents['StudentName'] + ' ' + tblStudents
-              ['Surname'];
-            sStudentPfp := tblStudents['ProfilePicture'];
-            iStudentIDTag := tblStudents['StudentID'];
-            if iStudentID = tblStudents['StudentID'] then
-            begin
-              sReviewerName := sReviewerName + ' (You)';
-            end;
-          end;
-          tblStudents.Next;
-        end;
-
-        with arrNameLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold, fsUnderline];
-          AutoSize := true;
-          Caption := sReviewerName;
-          Tag := iStudentIDTag;
-          Font.Size := 12;
-          Left := 55;
-          Top := 2;
-
-          OnClick := lblNameClick;
-          OnMouseEnter := lblNameMouseEnter;
-          OnMouseLeave := lblNameMouseLeave;
-        end;
-
-        // Rating and Date
-
-        with arrRatingDateLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          AutoSize := true;
-          Caption := DateToStr(tblUniversityReviews['ReviewDate']) + ' | ' +
-            IntToStr(tblUniversityReviews['Rating']) + '/5';
-          Tag := i;
-          Font.Size := 12;
-          Left := 55;
-          Top := 23;
-        end;
-
-        // Delete Button
-
-        if iStudentID = 7 then
-        begin
-          with arrDeleteBtn[i] do
-          begin
-            Parent := arrReviewPanels[i];
-            height := 36;
-            Width := 120;
-            Left := 250;
-            Top := 6;
-            Kind := bkCancel;
-            Font.Size := 10;
-            Caption := 'Delete Review';
-            Tag := tblUniversityReviews['UReviewID'];
-
-            OnClick := DeleteBtnClick;
-          end;
-        end;
-
-        // Pfp
-
-        with arrPfp[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Proportional := true;
-          Center := true;
-          Picture.LoadFromFile(sStudentPfp);
-          Left := 5;
-          Top := 7;
-          Width := 50;
-          height := 35;
-        end;
-      end;
-      tblUniversityReviews.Next;
-    end;
-    result := FloatToStrF(rRatingTotal / rCount, ffFixed, 8, 1);
-  end;
-
-  ScrollBox.VertScrollBar.Range := iTopPanel + 30;
 end;
 
 procedure TFormatCalculation.DeleteBtnClick(Sender: TObject);
@@ -700,7 +150,6 @@ begin
 end;
 
 function TFormatCalculation.FindCourseFee(lblCourse: TLabel): real;
-
 var
   bFlag: boolean;
 begin
@@ -741,7 +190,6 @@ begin
 end;
 
 function TFormatCalculation.FindCourseLength(lblCourse: TLabel): string;
-
 var
   bFlag: boolean;
 begin
@@ -788,12 +236,10 @@ begin
 end;
 
 function TFormatCalculation.FindPrimary(var tFile: Textfile): TColor;
-
 var
   sPrimary, sLine, sP: string;
   iPos: integer;
 begin
-
   // Primary
 
   Reset(tFile);
@@ -814,12 +260,10 @@ begin
 end;
 
 function TFormatCalculation.FindPrimaryBrighter(var tFile: Textfile): TColor;
-
 var
   sPrimaryBrighter, sPB, sLine: string;
   iPos: integer;
 begin
-
   // Primary Brighter
 
   Reset(tFile);
@@ -840,12 +284,10 @@ begin
 end;
 
 function TFormatCalculation.FindSecondary(var tFile: Textfile): TColor;
-
 var
   sLine, sSecondary, sS: string;
   iPos: integer;
 begin
-
   // Secondary
 
   Reset(tFile);
@@ -866,12 +308,10 @@ begin
 end;
 
 function TFormatCalculation.FindSecondaryBrighter(var tFile: Textfile): TColor;
-
 var
   sLine, sSecondaryBrighter, sSB: string;
   iPos: integer;
 begin
-
   // Secondary Brighter
   Reset(tFile);
   while NOT(Eof(tFile)) do
@@ -984,24 +424,6 @@ begin
       tblStudents.Next;
     end;
   end;
-end;
-
-procedure TFormatCalculation.lblNameClick(Sender: TObject);
-begin
-  // Displays clicked on user profile
-
-  iStudentProfileID := (Sender AS TLabel).Tag;
-  frmProfile.Show;
-end;
-
-procedure TFormatCalculation.lblNameMouseEnter(Sender: TObject);
-begin
-  MouseEnterLabel(Sender AS TLabel);
-end;
-
-procedure TFormatCalculation.lblNameMouseLeave(Sender: TObject);
-begin
-  MouseLeaveLabel(Sender AS TLabel);
 end;
 
 procedure TFormatCalculation.MouseEnterLabel(sample: TLabel);
