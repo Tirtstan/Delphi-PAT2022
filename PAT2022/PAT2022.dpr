@@ -15,7 +15,8 @@ uses
   frmUniversityInfo_U in 'frmUniversityInfo_U.pas' {frmUniversityInfo},
   frmCourseInfo_U in 'frmCourseInfo_U.pas' {frmCourseInfo},
   frmProfile_U in 'frmProfile_U.pas' {frmProfile},
-  frmCustomise_U in 'frmCustomise_U.pas' {frmCustomise};
+  frmCustomise_U in 'frmCustomise_U.pas' {frmCustomise},
+  clsReviews in 'clsReviews.pas';
 
 {$R *.res}
 

@@ -31,14 +31,12 @@ object frmCustomise: TfrmCustomise
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitLeft = -8
     object Panel2: TPanel
       Left = 16
       Top = 64
       Width = 289
       Height = 393
       Align = alCustom
-      Alignment = taLeftJustify
       Anchors = []
       BevelOuter = bvNone
       Color = 4822522
@@ -365,7 +363,6 @@ object frmCustomise: TfrmCustomise
       Width = 296
       Height = 393
       Align = alCustom
-      Alignment = taRightJustify
       Anchors = []
       BevelOuter = bvNone
       Color = 4822522

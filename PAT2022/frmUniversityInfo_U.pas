@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.Buttons, dbPAT2022, JPEG, clsFormatCalculations, Math;
+  Vcl.ComCtrls, Vcl.Buttons, dbPAT2022, JPEG, clsFormatCalculations, Math,
+  clsReviews;
 
 type
   TfrmUniversityInfo = class(TForm)
@@ -67,6 +68,7 @@ type
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
+    objReviews: TReviews;
     sUniversityRating: string;
     iUniversityReviewID: Integer;
     rRating: real;
@@ -127,11 +129,13 @@ begin
 
     // Reload here
     Panel8.Height := 497;
-    lblRating.Caption := objFormatCalculations.CreateReviewsUni(Panel8,
-      frmUniversityInfo, cmbSort);
+    objReviews := TReviews.Create(frmUniversityInfo, Panel8, cmbSort,
+      dbmPAT2022.tblUniversityReviews, iUniversityID);
+    objReviews.CreateReviews;
+    lblRating.Caption := objReviews.GetRating;
 
     Label4.Caption := 'University''s Reviews: ' + '(' +
-      IntToStr(objFormatCalculations.CountUniReviewAmount) + ')';
+      IntToStr(objReviews.CountReviewAmount) + ')';
 
     // Updating rating visual
 
@@ -210,11 +214,13 @@ begin
       bitDeleteReview.Enabled := false;
 
       // Reloading reviews
-      lblRating.Caption := objFormatCalculations.CreateReviewsUni(Panel8,
-        frmUniversityInfo, cmbSort);
+      objReviews := TReviews.Create(frmUniversityInfo, Panel8, cmbSort,
+        dbmPAT2022.tblUniversityReviews, iUniversityID);
+      objReviews.CreateReviews;
+      lblRating.Caption := objReviews.GetRating;
 
       Label4.Caption := 'University''s Reviews: ' + '(' +
-        IntToStr(objFormatCalculations.CountUniReviewAmount) + ')';
+        IntToStr(objReviews.CountReviewAmount) + ')';
 
       // Updating rating visual
 
@@ -394,8 +400,13 @@ end;
 
 procedure TfrmUniversityInfo.cmbSortChange(Sender: TObject);
 begin
-  lblRating.Caption := objFormatCalculations.CreateReviewsUni(Panel8,
-    frmUniversityInfo, cmbSort);
+  objReviews := TReviews.Create(frmUniversityInfo, Panel8, cmbSort,
+    dbmPAT2022.tblUniversityReviews, iUniversityID);
+  objReviews.CreateReviews;
+  lblRating.Caption := objReviews.GetRating;
+
+  Label4.Caption := 'University''s Reviews: ' + '(' +
+    IntToStr(objReviews.CountReviewAmount) + ')';
 end;
 
 procedure TfrmUniversityInfo.btnBackClick(Sender: TObject);
@@ -443,17 +454,18 @@ begin
   pnlWriteReview.Visible := false;
   pnlConfirmReview.Visible := false;
 
-  Label4.Caption := 'University''s Reviews: ' + '(' +
-    IntToStr(objFormatCalculations.CountUniReviewAmount) + ')';
-
   // Displaying reviews
   cmbSort.ItemIndex := 0;
-  lblRating.Caption := objFormatCalculations.CreateReviewsUni(Panel8,
-    frmUniversityInfo, cmbSort);
+  objReviews := TReviews.Create(frmUniversityInfo, Panel8, cmbSort,
+    dbmPAT2022.tblUniversityReviews, iUniversityID);
+  objReviews.CreateReviews;
+  lblRating.Caption := objReviews.GetRating;
+
+  Label4.Caption := 'University''s Reviews: ' + '(' +
+    IntToStr(objReviews.CountReviewAmount) + ')';
 
 
   // Colour Scheme
-
 
   // Panels
 

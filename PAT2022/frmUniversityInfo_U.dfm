@@ -26,8 +26,6 @@ object frmUniversityInfo: TfrmUniversityInfo
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1113
-    ExplicitHeight = 721
     object Panel2: TPanel
       Left = 43
       Top = 68

@@ -26,8 +26,6 @@ object frmCourseInfo: TfrmCourseInfo
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1113
-    ExplicitHeight = 722
     object Panel2: TPanel
       Left = 24
       Top = 64

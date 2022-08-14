@@ -25,8 +25,6 @@ object frmProfile: TfrmProfile
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 545
-    ExplicitHeight = 737
     object Panel2: TPanel
       Left = 288
       Top = 20
