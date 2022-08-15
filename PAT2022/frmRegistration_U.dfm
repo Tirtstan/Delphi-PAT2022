@@ -25,8 +25,6 @@ object frmRegistration: TfrmRegistration
     Color = 9128543
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 593
-    ExplicitHeight = 481
     object Panel2: TPanel
       Left = 32
       Top = 72

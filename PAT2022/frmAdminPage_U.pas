@@ -171,6 +171,8 @@ begin
 end;
 
 procedure TfrmAdminPage.btnStudentsClick(Sender: TObject);
+var
+  I: integer;
 begin
   lblTitle.Caption := btnStudents.Caption;
 
@@ -199,6 +201,7 @@ begin
   cmbSearch.Items.Add('PhoneNumber');
   cmbSearch.Items.Add('Bio');
   cmbSearch.Items.Add('ProfilePicture');
+  cmbSearch.Items.Add('Birthday');
 
   with dbgDatabase do
   begin
@@ -229,7 +232,7 @@ procedure TfrmAdminPage.btnUniversitiesClick(Sender: TObject);
 begin
   lblTitle.Caption := btnUniversities.Caption;
 
-  // srchDtaabase Fail Saving
+  // srchDatabase Fail Saving
 
   srchDatabase.TextHint := 'Search ' + btnUniversities.Caption + '...';
   srchDatabase.Clear;
@@ -660,9 +663,7 @@ procedure TfrmAdminPage.srchDatabaseChange(Sender: TObject);
 begin
   // SQL searching
   sSearch := srchDatabase.Text;
-
   dbgDatabase.DataSource := dbmPAT2022.dsSQL;
-
   if NOT(sTable = '') then
   begin
     with dbmPAT2022 do

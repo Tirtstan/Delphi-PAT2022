@@ -41,7 +41,6 @@ type
     lblLength: TLabel;
     lblFee: TLabel;
     redFee: TRichEdit;
-    Panel7: TPanel;
     bitCalculateFee: TBitBtn;
     spnWeeks: TSpinEdit;
     lblRatingVisual: TLabel;
@@ -55,7 +54,6 @@ type
     lblProvince: TLabel;
     lblPublic: TLabel;
     Panel18: TPanel;
-    Panel19: TPanel;
     lblUniversity: TLabel;
     cmbSort: TComboBox;
     procedure FormCreate(Sender: TObject);
@@ -404,9 +402,6 @@ begin
   // Function for creating the reviews
   cmbSort.ItemIndex := 0;
 
-  // lblRating.Caption := objFormatCalculations.CreateReviews(Panel8,
-  // frmCourseInfo, cmbSort);
-
   objReviews := TReviews.Create(frmCourseInfo, Panel8, cmbSort,
     dbmPAT2022.tblCourseReviews, iCourseID);
   objReviews.CreateReviews;
@@ -415,8 +410,6 @@ begin
   Label4.Caption := 'Course''s Reviews: ' + '(' +
     IntToStr(objReviews.CountReviewAmount) + ')';
 
-  // Label4.Caption := 'Course''s Reviews: ' + ' (' +
-  // IntToStr(objFormatCalculations.CountCourseReviewAmount) + ')';
 
 
 
@@ -430,7 +423,6 @@ begin
   Panel4.color := Primary;
   Panel5.color := Secondary;
   Panel6.color := Primary;
-  Panel7.color := Secondary;
   Panel8.color := Primary;
   Panel9.color := Secondary;
   Panel10.color := Secondary;
@@ -446,7 +438,6 @@ begin
   Panel16.color := Primary;
   Panel17.color := Primary;
   Panel18.color := Primary;
-  Panel19.color := Primary;
 
   // Labels
 
@@ -628,10 +619,8 @@ begin
       begin
         iUniversityID := tblUniversities['UniversityID'];
         sUniversityName := tblUniversities['University'];
-        { frmCourseInfo.close;
-          frmUniversityInfo.Show; }
-
-        objFormatCalculations.FormHideShow(frmCourseInfo, frmUniversityInfo);
+        frmCourseInfo.Hide;
+        frmUniversityInfo.Show;
         bFlag := false;
       end;
       tblUniversities.Next;

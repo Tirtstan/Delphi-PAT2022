@@ -104,6 +104,7 @@ var
   arrReview: array of TRichEdit;
   arrDeleteBtn: array of TBitBtn;
   ScrollBox: TScrollbox;
+  lblError: TLabel;
 begin
   // Creating (dynamically) all the reviews
 
@@ -128,205 +129,224 @@ begin
     BorderStyle := bsNone;
   end;
 
+  if CountReviewAmount < 1 then
+  begin
+    lblError := TLabel.Create(fOwner);
+    with lblError do
+    begin
+      Parent := ScrollBox;
+      Alignment := taCenter;
+      color := PrimaryBrighter;
+      Font.color := Secondary;
+      AutoSize := true;
+      Left := 20;
+      Top := (ScrollBox.height div 2) - 20;
+      Font.Size := 12;
+      Font.Style := [fsBold];
+      Caption := 'No reviews to load :( Be the first to post one!';
+    end;
+  end;
   // Creating Reviews
 
   // Dynamically creating the reviews (with actual clickable UI :O, no richedit only :O!!)
-
-  with dbmPAT2022 do
+  if CountReviewAmount >= 1 then
   begin
-    fTADOTable.Open;
-
-    // Giving the arrays lengths (start at 0)
-
-    iArrayLength := 0;
-    iArrayLength := CountReviewAmount; // getting review amount
-
-    SetLength(arrReviewPanels, iArrayLength + 1);
-    SetLength(arrNameLabel, iArrayLength + 1);
-    SetLength(arrRatingDateLabel, iArrayLength + 1);
-    SetLength(arrReview, iArrayLength + 1);
-    SetLength(arrDeleteBtn, iArrayLength + 1);
-    SetLength(arrPfp, iArrayLength + 1);
-
-    // Freeing
-
-    for i := 0 to iArrayLength do
+    with dbmPAT2022 do
     begin
-      arrPfp[i].Free;
-      arrDeleteBtn[i].Free;
-      arrNameLabel[i].Free;
-      arrRatingDateLabel[i].Free;
-      arrReview[i].Free;
-      arrReviewPanels[i].Free;
-    end;
-    // Displaying all info for the courses
+      fTADOTable.Open;
 
-    // Creating Part
+      // Giving the arrays lengths (start at 0)
 
-    iTopPanel := 15;
-    i := 0;
-    iStudentIDTag := 0;
+      iArrayLength := 0;
+      iArrayLength := CountReviewAmount; // getting review amount
 
-    fTADOTable.First;
-    case fSort.ItemIndex of
-      - 1:
-        fTADOTable.Sort := 'ReviewDate DESC';
-      0:
-        fTADOTable.Sort := 'ReviewDate DESC';
-      1:
-        fTADOTable.Sort := 'ReviewDate ASC';
-      2:
-        fTADOTable.Sort := 'Rating DESC';
-      3:
-        fTADOTable.Sort := 'Rating ASC';
-    end;
+      SetLength(arrReviewPanels, iArrayLength + 1);
+      SetLength(arrNameLabel, iArrayLength + 1);
+      SetLength(arrRatingDateLabel, iArrayLength + 1);
+      SetLength(arrReview, iArrayLength + 1);
+      SetLength(arrDeleteBtn, iArrayLength + 1);
+      SetLength(arrPfp, iArrayLength + 1);
 
-    while NOT(fTADOTable.Eof) do
-    begin
-      if fTADOTable[fFieldID] = fReviewID then
+      // Freeing
+
+      for i := 0 to iArrayLength do
       begin
-        inc(i);
-        rCount := rCount + 1;
-        rRatingTotal := rRatingTotal + fTADOTable['Rating'];
+        arrPfp[i].Free;
+        arrDeleteBtn[i].Free;
+        arrNameLabel[i].Free;
+        arrRatingDateLabel[i].Free;
+        arrReview[i].Free;
+        arrReviewPanels[i].Free;
+      end;
+      // Displaying all info for the courses
 
-        arrReviewPanels[i] := TPanel.Create(fOwner);
-        arrNameLabel[i] := TLabel.Create(fOwner);
-        arrRatingDateLabel[i] := TLabel.Create(fOwner);
-        arrReview[i] := TRichEdit.Create(fOwner);
-        arrDeleteBtn[i] := TBitBtn.Create(fOwner);
-        arrPfp[i] := TImage.Create(fOwner);
+      // Creating Part
 
-        // Review Panel
+      iTopPanel := 15;
+      i := 0;
+      iStudentIDTag := 0;
 
-        with arrReviewPanels[i] do
+      fTADOTable.First;
+      case fSort.ItemIndex of
+        - 1:
+          fTADOTable.Sort := 'ReviewDate DESC';
+        0:
+          fTADOTable.Sort := 'ReviewDate DESC';
+        1:
+          fTADOTable.Sort := 'ReviewDate ASC';
+        2:
+          fTADOTable.Sort := 'Rating DESC';
+        3:
+          fTADOTable.Sort := 'Rating ASC';
+      end;
+
+      while NOT(fTADOTable.Eof) do
+      begin
+        if fTADOTable[fFieldID] = fReviewID then
         begin
-          Parent := ScrollBox;
-          ParentBackground := false;
-          color := Primary;
-          Tag := i;
-          BevelOuter := bvNone;
-          height := 110;
-          Width := 376;
-          Left := 8;
-          Top := iTopPanel;
-        end;
-        inc(iTopPanel, 130);
+          inc(i);
+          rCount := rCount + 1;
+          rRatingTotal := rRatingTotal + fTADOTable['Rating'];
 
-        // Name and Surname
+          arrReviewPanels[i] := TPanel.Create(fOwner);
+          arrNameLabel[i] := TLabel.Create(fOwner);
+          arrRatingDateLabel[i] := TLabel.Create(fOwner);
+          arrReview[i] := TRichEdit.Create(fOwner);
+          arrDeleteBtn[i] := TBitBtn.Create(fOwner);
+          arrPfp[i] := TImage.Create(fOwner);
 
-        tblStudents.First;
-        while NOT(tblStudents.Eof) do
-        begin
-          if tblStudents['StudentID'] = fTADOTable['StudentID'] then
+          // Review Panel
+
+          with arrReviewPanels[i] do
           begin
-            sReviewerName := tblStudents['StudentName'] + ' ' + tblStudents
-              ['Surname'];
-            sStudentPfp := tblStudents['ProfilePicture'];
-            iStudentIDTag := tblStudents['StudentID'];
-            if iStudentID = tblStudents['StudentID'] then
-            begin
-              sReviewerName := sReviewerName + ' (You)';
-            end;
+            Parent := ScrollBox;
+            ParentBackground := false;
+            color := Primary;
+            Tag := i;
+            BevelOuter := bvNone;
+            height := 110;
+            Width := 376;
+            Left := 8;
+            Top := iTopPanel;
           end;
-          tblStudents.Next;
-        end;
+          inc(iTopPanel, 130);
 
-        with arrNameLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold, fsUnderline];
-          AutoSize := true;
-          Caption := sReviewerName;
-          Tag := iStudentIDTag;
-          Font.Size := 12;
-          Left := 55;
-          Top := 2;
+          // Name and Surname
 
-          OnClick := lblNameClick;
-          OnMouseEnter := lblNameMouseEnter;
-          OnMouseLeave := lblNameMouseLeave;
+          tblStudents.First;
+          while NOT(tblStudents.Eof) do
+          begin
+            if tblStudents['StudentID'] = fTADOTable['StudentID'] then
+            begin
+              sReviewerName := tblStudents['StudentName'] + ' ' + tblStudents
+                ['Surname'];
+              sStudentPfp := tblStudents['ProfilePicture'];
+              iStudentIDTag := tblStudents['StudentID'];
+              if iStudentID = tblStudents['StudentID'] then
+              begin
+                sReviewerName := sReviewerName + ' (You)';
+              end;
+            end;
+            tblStudents.Next;
+          end;
 
-        end;
-
-        // Rating and Date
-
-        with arrRatingDateLabel[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          AutoSize := true;
-          Caption := DateToStr(fTADOTable['ReviewDate']) + ' | ' +
-            IntToStr(fTADOTable['Rating']) + '/5';
-          Tag := i;
-          Font.Size := 12;
-          Left := 55;
-          Top := 23;
-        end;
-
-        // Review
-
-        with arrReview[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          ReadOnly := true;
-          Text := fTADOTable['Review'];
-          ScrollBars := ssVertical;
-          color := PrimaryBrighter;
-          Font.color := Secondary;
-          Font.Style := [fsBold];
-          Font.Size := 10;
-          BorderStyle := bsNone;
-          WordWrap := true;
-          EditMargins.Left := 3;
-          EditMargins.right := 3;
-          height := 54;
-          Width := 360;
-          Left := 8;
-          Top := 47;
-        end;
-
-        // Delete Button
-
-        if iStudentID = 7 then
-        begin
-          with arrDeleteBtn[i] do
+          with arrNameLabel[i] do
           begin
             Parent := arrReviewPanels[i];
-            height := 36;
-            Width := 120;
-            Left := 250;
-            Top := 6;
-            Kind := bkCancel;
-            Font.Size := 10;
-            Caption := 'Delete Review';
-            Tag := fTADOTable[fID];
+            Font.color := Secondary;
+            Font.Style := [fsBold, fsUnderline];
+            AutoSize := true;
+            Caption := sReviewerName;
+            Tag := iStudentIDTag;
+            Font.Size := 12;
+            Left := 55;
+            Top := 2;
 
-            OnClick := DeleteBtnClick;
+            OnClick := lblNameClick;
+            OnMouseEnter := lblNameMouseEnter;
+            OnMouseLeave := lblNameMouseLeave;
+
+          end;
+
+          // Rating and Date
+
+          with arrRatingDateLabel[i] do
+          begin
+            Parent := arrReviewPanels[i];
+            Font.color := Secondary;
+            Font.Style := [fsBold];
+            AutoSize := true;
+            Caption := DateToStr(fTADOTable['ReviewDate']) + ' | ' +
+              IntToStr(fTADOTable['Rating']) + '/5';
+            Tag := i;
+            Font.Size := 12;
+            Left := 55;
+            Top := 23;
+          end;
+
+          // Review
+
+          with arrReview[i] do
+          begin
+            Parent := arrReviewPanels[i];
+            ReadOnly := true;
+            Text := fTADOTable['Review'];
+            ScrollBars := ssVertical;
+            color := PrimaryBrighter;
+            Font.color := Secondary;
+            Font.Style := [fsBold];
+            Font.Size := 10;
+            BorderStyle := bsNone;
+            WordWrap := true;
+            EditMargins.Left := 3;
+            EditMargins.right := 3;
+            height := 54;
+            Width := 360;
+            Left := 8;
+            Top := 47;
+          end;
+
+          // Delete Button
+
+          if iStudentID = 7 then
+          begin
+            with arrDeleteBtn[i] do
+            begin
+              Parent := arrReviewPanels[i];
+              height := 36;
+              Width := 120;
+              Left := 250;
+              Top := 6;
+              Kind := bkCancel;
+              Font.Size := 10;
+              Caption := 'Delete Review';
+              Tag := fTADOTable[fID];
+
+              OnClick := DeleteBtnClick;
+            end;
+          end;
+
+          // Pfp
+
+          with arrPfp[i] do
+          begin
+            Parent := arrReviewPanels[i];
+            Proportional := true;
+            Center := true;
+            Picture.LoadFromFile(sStudentPfp);
+            Left := 5;
+            Top := 7;
+            Width := 50;
+            height := 35;
           end;
         end;
-
-        // Pfp
-
-        with arrPfp[i] do
-        begin
-          Parent := arrReviewPanels[i];
-          Proportional := true;
-          Center := true;
-          Picture.LoadFromFile(sStudentPfp);
-          Left := 5;
-          Top := 7;
-          Width := 50;
-          height := 35;
-        end;
+        fTADOTable.Next;
       end;
-      fTADOTable.Next;
     end;
-  end;
-  fRating := rRatingTotal / rCount;
+    fRating := rRatingTotal / rCount;
 
-  ScrollBox.VertScrollBar.Range := iTopPanel + 30;
+    ScrollBox.VertScrollBar.Range := iTopPanel + 30;
+  end;
 end;
 
 procedure TReviews.DeleteBtnClick(Sender: TObject);

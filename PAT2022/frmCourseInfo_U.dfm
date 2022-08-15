@@ -153,91 +153,71 @@ object frmCourseInfo: TfrmCourseInfo
           ParentShowHint = False
           ShowHint = True
         end
-        object Panel7: TPanel
+        object bitCalculateFee: TBitBtn
           Left = 8
-          Top = 78
+          Top = 67
           Width = 145
-          Height = 187
-          BevelOuter = bvNone
-          Color = 4822522
-          ParentBackground = False
+          Height = 50
+          Hint = 'Calculates the fee per week'
+          Caption = 'Calculate Fee'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          Kind = bkRetry
+          NumGlyphs = 2
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
           TabOrder = 0
-          object bitCalculateFee: TBitBtn
-            Left = 8
-            Top = 8
-            Width = 129
-            Height = 49
-            Hint = 'Calculates the fee per week'
-            Caption = 'Calculate Fee'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Segoe UI'
-            Font.Style = []
-            Kind = bkRetry
-            NumGlyphs = 2
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            TabOrder = 0
-            OnClick = bitCalculateFeeClick
-          end
-          object spnWeeks: TSpinEdit
-            Left = 8
-            Top = 63
-            Width = 129
-            Height = 43
-            Hint = 'Number of Weeks'
-            AutoSelect = False
-            AutoSize = False
-            Color = 11759493
-            Ctl3D = False
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = 4822522
-            Font.Height = -19
-            Font.Name = 'Segoe UI'
-            Font.Style = [fsBold]
-            MaxValue = 1000
-            MinValue = 1
-            ParentCtl3D = False
-            ParentFont = False
-            ParentShowHint = False
-            ShowHint = True
-            StyleElements = [seFont, seClient]
-            TabOrder = 1
-            Value = 1
-          end
-          object Panel19: TPanel
-            Left = 8
-            Top = 112
-            Width = 129
-            Height = 65
-            BevelOuter = bvNone
-            Color = 9128543
-            ParentBackground = False
-            TabOrder = 2
-            object redFee: TRichEdit
-              Left = 8
-              Top = 8
-              Width = 113
-              Height = 49
-              BorderStyle = bsNone
-              Color = 11759493
-              EditMargins.Left = 3
-              EditMargins.Right = 3
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 4822522
-              Font.Height = -16
-              Font.Name = 'Segoe UI'
-              Font.Style = [fsBold]
-              Lines.Strings = (
-                'Fee')
-              ParentFont = False
-              ReadOnly = True
-              ScrollBars = ssVertical
-              TabOrder = 0
-            end
-          end
+          OnClick = bitCalculateFeeClick
+        end
+        object spnWeeks: TSpinEdit
+          Left = 8
+          Top = 136
+          Width = 145
+          Height = 51
+          Hint = 'Number of Weeks'
+          AutoSelect = False
+          AutoSize = False
+          Color = 11759493
+          Ctl3D = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 4822522
+          Font.Height = -19
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          MaxValue = 1000
+          MinValue = 1
+          ParentCtl3D = False
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          StyleElements = [seFont, seClient]
+          TabOrder = 1
+          Value = 1
+        end
+        object redFee: TRichEdit
+          Left = 8
+          Top = 209
+          Width = 145
+          Height = 49
+          BorderStyle = bsNone
+          Color = 11759493
+          EditMargins.Left = 3
+          EditMargins.Right = 3
+          Font.Charset = ANSI_CHARSET
+          Font.Color = 4822522
+          Font.Height = -16
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          Lines.Strings = (
+            'Fee')
+          ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssVertical
+          TabOrder = 2
         end
       end
       object Panel18: TPanel

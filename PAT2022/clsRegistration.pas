@@ -23,12 +23,17 @@ Type
     function GetUniversityID(): integer;
     function GetDateRegistered(): TDateTime;
     function GetBalance(): Real;
-    function ToString(): String;
+    function CalculateSpent(): Real;
   end;
 
 implementation
 
 { TRegistration }
+
+function TRegistration.CalculateSpent: Real;
+begin
+  result := 10000 - fBalance;
+end;
 
 constructor TRegistration.Create(iConStudentID, iConCourseID, iConUniversityID
   : integer; dDateRegistered: TDateTime; rBalance: Real);
@@ -68,14 +73,6 @@ end;
 procedure TRegistration.SetBalance(rBalance: Real);
 begin
   fBalance := rBalance;
-end;
-
-function TRegistration.ToString: String;
-begin
-  { result := 'StudentID: ' + IntToStr(fStudentID) + #13 + 'CourseID: ' +
-    IntToStr(fCourseID) + #13 + 'UniversityID: ' + IntToStr(fUniversityID) + #13
-    + 'Date Registered: ' + DateToStr(fDateRegistered) + #13 + 'Balance: ' +
-    FloatToStrf(fBalance, ffCurrency, 8, 2); } 
 end;
 
 end.
