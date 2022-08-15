@@ -150,21 +150,18 @@ begin
 end;
 
 function TFormatCalculation.FindCourseFee(lblCourse: TLabel): real;
-var
-  bFlag: boolean;
 begin
   // Finding CourseID
-  bFlag := true;
 
   with dbmPAT2022 do
   begin
     tblCourses.First;
-    while NOT(tblCourses.Eof) OR (bFlag = true) do
+    while NOT(tblCourses.Eof) do
     begin
       if (tblCourses['CourseID']) = StrToInt(copy(lblCourse.Name, 10)) then
       begin
         result := tblCourses['Fee'];
-        bFlag := false;
+        break;
       end;
       tblCourses.Next;
     end;

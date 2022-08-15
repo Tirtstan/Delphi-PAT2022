@@ -28,6 +28,7 @@ type
     btnProfile: TButton;
     btnAdmin: TButton;
     lblUser: TLabel;
+    btnRegistration: TButton;
     procedure btnUniClick(Sender: TObject);
     procedure btnCoursesClick(Sender: TObject);
     procedure btnBackClick(Sender: TObject);
@@ -36,6 +37,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnAdminClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnRegistrationClick(Sender: TObject);
   private
     { Private declarations }
     objFormatCalculations: TFormatCalculation;
@@ -50,7 +52,7 @@ implementation
 
 uses
   frmCourseBrowser_U, frmUniversityBrowser_U, frmLogin_U, frmProfile_U,
-  frmWelcome_U, frmCustomise_U, frmAdminPage_U;
+  frmWelcome_U, frmCustomise_U, frmAdminPage_U, frmRegistration_U;
 
 {$R *.dfm}
 
@@ -82,6 +84,12 @@ procedure TfrmBrowserChooser.btnUniClick(Sender: TObject);
 begin
   frmBrowserChooser.Hide;
   frmUniversityBrowser.Show;
+end;
+
+procedure TfrmBrowserChooser.btnRegistrationClick(Sender: TObject);
+begin
+  frmBrowserChooser.Hide;
+  frmRegistration.Show;
 end;
 
 procedure TfrmBrowserChooser.FormClose(Sender: TObject;
