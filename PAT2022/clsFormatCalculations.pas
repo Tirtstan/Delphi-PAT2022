@@ -24,8 +24,6 @@ type
     function FindCourseFee(lblCourse: TLabel): real;
     function FindCourseUni(): string;
     function CalculateFee(rWeeks: real; lblFee: TLabel): real;
-    procedure FormHideShow(frmHide, frmShow: TForm);
-    procedure FormBack(); // Too basic, need more variables, maybe later
     function FindPrimary(var tFile: Textfile): TColor;
     function FindPrimaryBrighter(var tFile: Textfile): TColor;
     function FindSecondary(var tFile: Textfile): TColor;
@@ -35,15 +33,7 @@ type
     function AllowedEmailDatabase(sText: string): boolean;
     function AllowedIDDatabase(sText: string): boolean;
     function AllowedPhoneNoDatabase(sText: string): boolean;
-
   end;
-
-var
-  tBack: Textfile;
-  frmPreviousShow, frmPreviousHide: TForm;
-  iStudentIDTag: integer;
-  redReview: TRichEdit;
-  bitConfirm: TBitBtn;
 
 implementation
 
@@ -53,7 +43,6 @@ uses frmCourseBrowser_U, frmUniversityBrowser_U, frmUniversityInfo_U,
 { TFormatCalculation }
 
 function TFormatCalculation.CalculateFee(rWeeks: real; lblFee: TLabel): real;
-
 var
   sFee: string;
 begin
@@ -325,21 +314,6 @@ begin
       break;
     end;
   end;
-end;
-
-procedure TFormatCalculation.FormBack;
-begin
-  frmPreviousShow.close;
-  frmPreviousHide.Show;
-end;
-
-procedure TFormatCalculation.FormHideShow(frmHide, frmShow: TForm);
-begin
-  frmHide.Hide;
-  frmShow.Show;
-
-  frmPreviousHide := frmHide;
-  frmPreviousShow := frmShow;
 end;
 
 function TFormatCalculation.AllowedEmailDatabase(sText: string): boolean;

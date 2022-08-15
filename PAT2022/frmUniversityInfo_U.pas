@@ -359,12 +359,11 @@ begin
       if sItems = tblCourses['Course'] then
       begin
         iCourseID := tblCourses['CourseID'];
-        { frmUniversityInfo.Close;
-          frmCourseInfo.Show; }
-        objFormatCalculations.FormHideShow(frmUniversityInfo, frmCourseInfo);
+        frmUniversityInfo.Hide;
+        frmCourseInfo.Show;
         bFlag := false;
       end
-      else if sItems = '-1' then
+      else if lstUniCourses.ItemIndex = -1 then
       begin
         ShowMessage('Please select a course.');
       end;
@@ -617,10 +616,8 @@ end;
 
 procedure TfrmUniversityInfo.lblUniverCoursesClick(Sender: TObject);
 begin
-  { frmUniversityInfo.Close;
-    frmCourseBrowser.Show; }
-
-  objFormatCalculations.FormHideShow(frmUniversityInfo, frmCourseBrowser);
+  frmUniversityInfo.Close;
+  frmCourseBrowser.Show;
 end;
 
 procedure TfrmUniversityInfo.lblUniverCoursesMouseEnter(Sender: TObject);

@@ -95,8 +95,8 @@ begin
         iConUniversityID, now, 10000);
       with objRegistration do
       begin
-        rSpent := objRegistration.GetBalance - rFee;
-        rSpent := objRegistration.GetBalance - rSpent;
+        { rSpent := objRegistration.GetBalance - rFee;
+          rSpent := objRegistration.GetBalance - rSpent; }
         SetBalance(objRegistration.GetBalance - rFee);
         redBalance.Text := FloatToStrF(GetBalance, ffCurrency, 8, 2);
       end;
@@ -278,7 +278,8 @@ begin
         end;
         tblUniversities.Next;
       end;
-      sLine := sLine + 'Spent: ' + FloatToStrF(rSpent, ffCurrency, 8, 2);
+      sLine := sLine + 'Spent: ' + FloatToStrF(objRegistration.CalculateSpent,
+        ffCurrency, 8, 2);
     end;
 
     result := sLine;

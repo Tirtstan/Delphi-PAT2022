@@ -47,7 +47,6 @@ type
 
 var
   frmWelcome: TfrmWelcome;
-  frmPreviousForm: TForm;
 
 implementation
 

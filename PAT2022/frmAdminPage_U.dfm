@@ -25,9 +25,6 @@ object frmAdminPage: TfrmAdminPage
     Color = 9128543
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitWidth = 1130
-    ExplicitHeight = 737
     object Panel10: TPanel
       Left = 780
       Top = 80
