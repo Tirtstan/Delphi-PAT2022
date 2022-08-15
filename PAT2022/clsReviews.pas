@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.Buttons, DB, ADODB, dbPAT2022, clsFormatCalculations;
+  Vcl.ComCtrls, Vcl.Buttons, DB, ADODB, dbPAT2022, clsFormatCalculations, JPEG;
 
 type
   TReviews = class(TObject)
@@ -105,6 +105,7 @@ var
   arrDeleteBtn: array of TBitBtn;
   ScrollBox: TScrollbox;
   lblError: TLabel;
+  imgConnor: TImage;
 begin
   // Creating (dynamically) all the reviews
 
@@ -131,6 +132,17 @@ begin
 
   if CountReviewAmount < 1 then
   begin
+    imgConnor := TImage.Create(fOwner);
+    with imgConnor do
+    begin
+      Parent := ScrollBox;
+      Proportional := true;
+      Center := true;
+      Picture.LoadFromFile('conconsad.jpg');
+      height := ScrollBox.height;
+      Width := ScrollBox.Width;
+    end;
+
     lblError := TLabel.Create(fOwner);
     with lblError do
     begin
@@ -143,6 +155,8 @@ begin
       Top := (ScrollBox.height div 2) - 20;
       Font.Size := 12;
       Font.Style := [fsBold];
+      color := Primary;
+      Transparent := false;
       Caption := 'No reviews to load :( Be the first to post one!';
     end;
   end;

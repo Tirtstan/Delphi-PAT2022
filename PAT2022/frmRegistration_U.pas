@@ -95,8 +95,6 @@ begin
         iConUniversityID, now, 10000);
       with objRegistration do
       begin
-        { rSpent := objRegistration.GetBalance - rFee;
-          rSpent := objRegistration.GetBalance - rSpent; }
         SetBalance(objRegistration.GetBalance - rFee);
         redBalance.Text := FloatToStrF(GetBalance, ffCurrency, 8, 2);
       end;
