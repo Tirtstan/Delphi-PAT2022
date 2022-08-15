@@ -31,8 +31,6 @@ object frmBrowserChooser: TfrmBrowserChooser
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1121
-    ExplicitHeight = 721
     object Label1: TLabel
       Left = 456
       Top = 40
@@ -138,9 +136,9 @@ object frmBrowserChooser: TfrmBrowserChooser
       OnClick = btnBackClick
     end
     object btnProfile: TButton
-      Left = 1008
+      Left = 992
       Top = 656
-      Width = 99
+      Width = 115
       Height = 49
       Caption = 'Profile'
       Font.Charset = DEFAULT_CHARSET
@@ -232,6 +230,21 @@ object frmBrowserChooser: TfrmBrowserChooser
       ParentFont = False
       TabOrder = 4
       OnClick = btnAdminClick
+    end
+    object btnRegistration: TButton
+      Left = 992
+      Top = 8
+      Width = 115
+      Height = 49
+      Caption = 'Registeration'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMoneyGreen
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnClick = btnRegistrationClick
     end
   end
 end

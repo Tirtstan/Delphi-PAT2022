@@ -16,7 +16,9 @@ uses
   frmCourseInfo_U in 'frmCourseInfo_U.pas' {frmCourseInfo},
   frmProfile_U in 'frmProfile_U.pas' {frmProfile},
   frmCustomise_U in 'frmCustomise_U.pas' {frmCustomise},
-  clsReviews in 'clsReviews.pas';
+  clsReviews in 'clsReviews.pas',
+  clsRegistration in 'clsRegistration.pas',
+  frmRegistration_U in 'frmRegistration_U.pas' {frmRegistration};
 
 {$R *.res}
 
@@ -35,6 +37,7 @@ begin
   Application.CreateForm(TfrmCourseInfo, frmCourseInfo);
   Application.CreateForm(TfrmProfile, frmProfile);
   Application.CreateForm(TfrmCustomise, frmCustomise);
+  Application.CreateForm(TfrmRegistration, frmRegistration);
   Application.Run;
 
 end.

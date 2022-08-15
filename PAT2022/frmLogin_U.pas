@@ -139,6 +139,10 @@ begin
   edtEmailL.Text := 'admin@app.com';
   edtPasswordL.Text := 'admin11!!';
 
+  // Student Version
+
+  edtEmailL.Text := 'tirt@gmail.com';
+  edtPasswordL.Text := 'SupBro32!!';
 end;
 
 procedure TfrmLogin.FormShow(Sender: TObject);

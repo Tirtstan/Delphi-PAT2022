@@ -36,6 +36,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
     bOnOff: boolean;
@@ -52,7 +53,7 @@ implementation
 
 uses
   frmAdminPage_U, frmRegister_U, frmLogin_U, frmCourseBrowser_U,
-  frmCustomise_U;
+  frmCustomise_U, frmRegistration_U;
 
 {$R *.dfm}
 
@@ -103,6 +104,12 @@ procedure TfrmWelcome.Button1Click(Sender: TObject);
 begin
   frmWelcome.Hide;
   frmCustomise.show;
+end;
+
+procedure TfrmWelcome.Button2Click(Sender: TObject);
+begin
+  frmWelcome.Hide;
+  frmRegistration.show;
 end;
 
 procedure TfrmWelcome.FormClose(Sender: TObject; var Action: TCloseAction);

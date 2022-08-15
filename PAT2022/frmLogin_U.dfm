@@ -31,7 +31,6 @@ object frmLogin: TfrmLogin
     ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 737
     object Label1: TLabel
       Left = 494
       Top = 120
