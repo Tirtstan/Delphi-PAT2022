@@ -25,9 +25,6 @@ object frmRegister: TfrmRegister
     Color = 9128543
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = -6
-    ExplicitWidth = 1129
-    ExplicitHeight = 741
     object Label1: TLabel
       Left = 464
       Top = 48
@@ -321,7 +318,7 @@ object frmRegister: TfrmRegister
         Top = 101
         Width = 123
         Height = 17
-        Caption = 'Max Characters: 255'
+        Caption = 'Max Characters: 240'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 4822522
         Font.Height = -13
@@ -357,7 +354,7 @@ object frmRegister: TfrmRegister
         Font.Height = -15
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
-        MaxLength = 255
+        MaxLength = 240
         ParentFont = False
         ParentShowHint = False
         ScrollBars = ssVertical

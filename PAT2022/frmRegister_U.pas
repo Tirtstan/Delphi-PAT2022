@@ -351,7 +351,7 @@ begin
   lblPhoneNumberError.Visible := false;
   lblPfpError.Visible := false;
 
-  redBioR.MaxLength := 255;
+  redBioR.MaxLength := 240;
 
 end;
 
@@ -439,7 +439,7 @@ begin
 
   // Loading stuff
 
-  redBioR.MaxLength := 255;
+  redBioR.MaxLength := 240;
 
   pfp1.Picture.LoadFromFile('hmmm2.png');
   pfp1.Cursor := crHandPoint;
@@ -516,7 +516,7 @@ procedure TfrmRegister.redBioRChange(Sender: TObject);
 var
   iCharactersLeft: integer;
 begin
-  iCharactersLeft := 255 - (length(redBioR.Text));
+  iCharactersLeft := 240 - (length(redBioR.Text));
   lblMaxCharacters.Caption := 'Characters Left: ' + IntToStr(iCharactersLeft);
 end;
 
