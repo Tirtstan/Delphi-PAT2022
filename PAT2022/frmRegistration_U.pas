@@ -214,7 +214,7 @@ begin
   bitBack.Enabled := false;
   bitConfirm.Enabled := true;
   bitConfirm.Caption := 'Next';
-  Panel3.Caption := 'Choose Univesity... (1/2)';
+  Panel3.Caption := 'Choose University... (1/2)';
   iCurrent := 1;
   lstInfo.ShowHint := true;
   lstInfo.Items.Clear;
